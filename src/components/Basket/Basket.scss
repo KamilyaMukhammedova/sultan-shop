@@ -1,0 +1,41 @@
+@import "../../styles/variables";
+
+.basket {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+
+  &__icon-div {
+    margin-right: 15px;
+    position: relative;
+  }
+
+  &__amount {
+    font-weight: 700;
+    color: $white;
+    line-height: 22px;
+    background-color: $yellow;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    text-align: center;
+    position: absolute;
+    top: -5px;
+    right: -9px;
+  }
+
+  &__inner p {
+    margin: 0;
+  }
+
+  &__name {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  &__sum {
+    font-weight: 600;
+    color: $black;
+  }
+}
