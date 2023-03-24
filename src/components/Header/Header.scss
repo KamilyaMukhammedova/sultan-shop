@@ -1,8 +1,13 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .header {
   &__top {
     padding: 20px 0;
+
+    @include medium {
+      display: none;
+    }
   }
 
   &__top-inner {
@@ -14,6 +19,10 @@
   &__top-box {
     display: flex;
     align-items: center;
+
+    @include large {
+      display: none;
+    }
   }
 
   &__top-box-border {
@@ -50,6 +59,19 @@
   &__divider {
     height: 1px;
     background-color: $grey3F;
+    opacity: 0.1;
+  }
+
+  &_divider1 {
+    @include medium {
+      display: none;
+    }
+  }
+
+  &__nav {
+    @include large {
+      width: 100%;
+    }
   }
 
   &__nav-list {
@@ -67,11 +89,26 @@
 
     &:first-child {
       border-left: none;
+
+      @include large {
+        margin-left: 0;
+        padding-left: 0;
+      }
     }
 
     &:hover {
       cursor: pointer;
       color: $yellow;
+    }
+
+    @include extraLarge {
+      margin-left: 10px;
+      padding-left: 10px;
+    }
+
+    @include large {
+      margin-left: 30px;
+      padding-left: 30px;
     }
   }
 
@@ -89,11 +126,52 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include extraLarge {
+      align-items: flex-start;
+    }
+
+    @include large {
+      align-items: center;
+    }
+
+    @include medium {
+      display: block;
+    }
+  }
+
+  &__bottom-inner2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
+    width: 85%;
+
+    @include extraLarge {
+      width: 75%;
+      justify-content: start;
+    }
+
+    @include medium {
+      width: 100%;
+      padding-top: 10px;
+    }
   }
 
   &__bottom-box1 {
-    margin-right: 20px;
+    width: 13%;
+
+    @include extraLarge {
+      width: 20%;
+    }
+
+    @include medium {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0;
+    }
   }
 
   &__btn {
@@ -112,6 +190,18 @@
       -ms-transform: scale(1.1);
       transform: scale(1.1);
     }
+
+    @include large {
+      padding: 17px 30px;
+    }
+
+    @include medium {
+      background-color: transparent;
+      color: $grey3F;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14.52px;
+    }
   }
 
   &__btn span {
@@ -126,6 +216,22 @@
     border-radius: 36px;
     justify-content: space-around;
     width: 230px;
+
+    @include extraLarge {
+      margin-right: 20px;
+    }
+
+    @include large {
+      height: 53px;
+    }
+
+    @include medium {
+      background-color: transparent;
+      width: inherit;
+      flex-direction: row-reverse;
+      margin-right: 0;
+      height: inherit;
+    }
   }
 
   &__bottom-search-div input {
@@ -136,6 +242,16 @@
     &::placeholder {
       color: $grey5C;
       font-size: 12px;
+
+      @include medium {
+        font-weight: 600;
+        line-height: 14.52px;
+        color: $grey3F;
+      }
+    }
+
+    @include medium {
+      width: 80%;
     }
   }
 
@@ -145,18 +261,59 @@
     height: 39px;
     width: 39px;
     border-radius: 50%;
+
+    @include medium {
+      background-color: transparent;
+      width: 20%;
+      margin-right: 10px;
+    }
+  }
+
+  &__bottom-search-form {
+    @include medium {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__bottom-box2 {
+    @include extraLarge {
+      margin-right: 20px;
+    }
+
+    @include medium {
+      margin-right: 0;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      border-right: 1px dashed rgba(63, 78, 101, 0.1);
+    }
   }
 
   &__bottom-box3 {
     display: flex;
     align-items: center;
     margin-right: 10px;
+
+    @include large {
+      display: none;
+    }
   }
 
   &__bottom-box4 {
     border-right: 1px dashed rgba(63, 78, 101, 0.1);
     border-left: 1px dashed rgba(63, 78, 101, 0.1);
     padding: 0 15px;
+
+    @include extraLarge {
+      border: none;
+      padding: 0;
+    }
+
+    @include large {
+      display: none;
+    }
   }
 
   &__bottom-box3 p {
@@ -184,5 +341,77 @@
     font-size: 10px;
     line-height: 15px;
     color: inherit;
+  }
+
+  &__bottom-box5 {
+    @include medium {
+      display: none;
+    }
+  }
+
+  &__menu-btn {
+    display: none;
+
+    @include medium {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $yellow;
+      border-color: transparent;
+      line-height: 39px;
+
+      &:hover {
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+    }
+
+    @include small {
+      width: 32px;
+      height: 32px;
+      line-height: 29px;
+    }
+  }
+
+  &__basket-hidden {
+    display: none;
+
+    @include medium {
+      display: block;
+    }
+  }
+
+  &__logo-img {
+    @include small {
+      width: 97px;
+      height: 41px;
+    }
+  }
+
+  &__divider-hidden {
+    display: none;
+
+    @include medium {
+      display: block;
+      margin: 0 -15px;
+    }
+  }
+
+  &__catalog-grey,
+  &__search-grey {
+    display: none;
+
+    @include medium {
+      display: inline;
+      margin-right: 10px;
+    }
+  }
+
+  &__catalog,
+  &__search {
+    @include medium {
+      display: none;
+    }
   }
 }

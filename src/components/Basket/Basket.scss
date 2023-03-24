@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .basket {
   display: flex;
@@ -22,6 +23,20 @@
     position: absolute;
     top: -5px;
     right: -9px;
+
+    @include small {
+      font-weight: 400;
+      height: 15px;
+      width: 15px;
+      font-size: 10px;
+      line-height: 15px;
+    }
+  }
+
+  &__inner {
+    @include medium {
+      display: none;
+    }
   }
 
   &__inner p {
@@ -37,5 +52,12 @@
   &__sum {
     font-weight: 600;
     color: $black;
+  }
+
+  &__icon {
+    @include small {
+      width: 22px;
+      height: 16px;
+    }
   }
 }

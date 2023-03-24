@@ -6,7 +6,7 @@ const Basket: React.FC = () => {
   return (
     <div className="basket">
       <div className="basket__icon-div">
-        <img src={basketIcon} alt="Basket icon"/>
+        <img src={basketIcon} alt="Basket icon" className="basket__icon"/>
         <div className="basket__amount">3</div>
       </div>
       <div className="basket__inner">
