@@ -1,0 +1,271 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.footer {
+  background-color: $grey3F;
+  padding: 20px 0;
+  color: $white;
+
+  @include large {
+    font-size: 12px;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+
+    @include medium {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__box1 {
+    width: 25%;
+    padding-top: 15px;
+
+    @include large {
+      padding-top: 0;
+    }
+
+    @include medium {
+      width: 100%;
+    }
+  }
+
+  &__box4 {
+    width: 20%;
+
+    @include medium {
+      display: none;
+    }
+  }
+
+  &__box2,
+  &__box3,
+  &__box5 {
+    width: 14%;
+
+    @include large {
+      width: 16%;
+    }
+
+    @include medium {
+      width: 33%;
+    }
+
+    @include small {
+      width: 50%;
+    }
+  }
+
+  &__info {
+    font-size: 16px;
+    line-height: 24px;
+
+    @include large {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  &__form {
+    margin-top: 35px;
+  }
+
+  &__form-label {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  &__form-div {
+    background-color: $white;
+    height: 59px;
+    display: flex;
+    align-items: center;
+    border-radius: 36px;
+    justify-content: space-around;
+    width: 80%;
+
+    @include extraLarge {
+      height: 45px;
+      padding: 0 5px;
+    }
+
+    @include large {
+      width: 90%;
+      border-radius: 30px;
+    }
+
+    @include medium {
+      width: 70%;
+    }
+
+    @include small {
+      width: 100%;
+    }
+  }
+
+  &__input {
+    border-color: transparent;
+    background-color: transparent;
+    outline: none;
+
+    &::placeholder {
+      font-size: 12px;
+      color: $grey5C;
+      line-height: 18px;
+      opacity: 0.6;
+
+      @include large {
+        font-size: 10px;
+        padding: 0 5px;
+      }
+    }
+
+    @include large {
+      width: 80%;
+    }
+  }
+
+  &__arrow-btn {
+    border-color: transparent;
+    background-color: $yellow;
+    height: 39px;
+    width: 39px;
+    border-radius: 50%;
+    line-height: 39px;
+
+    @include extraLarge {
+      height: 32px;
+      width: 32px;
+      line-height: 32px;
+    }
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+
+    @include large {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    @include medium {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  &__list-item {
+    line-height: 21px;
+    margin-bottom: 15px;
+
+    @include large {
+      margin-bottom: 12px;
+    }
+  }
+
+  &__list-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__price-list-btn {
+    color: $white;
+    font-weight: 700;
+    line-height: 16.94px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 21px 54px;
+    border: 1px solid transparent;
+    background-color: $yellow;
+    border-radius: 79px;
+
+    &:hover {
+      -ms-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+
+    @include extraLarge {
+      padding: 17px 30px;
+    }
+
+    @include large {
+      padding: 8px 30px;
+    }
+
+    @include medium {
+      padding: 15px 30px;
+    }
+
+    @include small {
+      padding: 12px 30px;
+    }
+  }
+
+  &__price-list-btn span {
+    margin-right: 10px;
+  }
+
+  &__social-text {
+    line-height: 21px;
+  }
+
+  &__whatsApp {
+    margin-right: 10px;
+  }
+
+  &__contacts p {
+    margin: 0 0 3px 0;
+  }
+
+  &__visa {
+    margin-right: 5px;
+  }
+
+  &__info-email {
+    margin: 20px 0;
+  }
+
+  &__hidden-div {
+    display: none;
+
+    @include medium {
+      display: block;
+    }
+  }
+
+  &__logo-div {
+    @include medium {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__logo-img {
+    @include small {
+      width: 97px;
+      height: auto;
+    }
+  }
+
+  &__social-hidden {
+    display: none;
+
+    @include small {
+      display: block;
+      width: 50%;
+      padding-top: 5.3rem;
+    }
+  }
+}

@@ -36,24 +36,8 @@
     align-items: center;
   }
 
-  &__top-info {
+  &__info {
     margin-left: 15px;
-  }
-
-  &__top-info p {
-    margin: 0;
-  }
-
-  &__top-bold {
-    font-weight: 600;
-    line-height: 18.2px;
-    color: $black;
-  }
-
-  &__top-regular {
-    font-weight: 300;
-    line-height: 15.6px;
-    font-size: 12px;
   }
 
   &__divider {
@@ -242,6 +226,7 @@
     &::placeholder {
       color: $grey5C;
       font-size: 12px;
+      opacity: 0.6;
 
       @include medium {
         font-weight: 600;
@@ -261,6 +246,7 @@
     height: 39px;
     width: 39px;
     border-radius: 50%;
+    line-height: 39px;
 
     @include medium {
       background-color: transparent;
@@ -316,31 +302,13 @@
     }
   }
 
-  &__bottom-box3 p {
+  &__contacts p {
     margin: 0 0 3px 0;
   }
 
   &__bottom-box3-inner {
     text-align: right;
     margin-right: 10px;
-  }
-
-  &__bottom-box3-num {
-    font-weight: 600;
-    color: $black;
-    line-height: 21px;
-  }
-
-  &__bottom-box3-schedule {
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 18px;
-  }
-
-  &__bottom-box3-link {
-    font-size: 10px;
-    line-height: 15px;
-    color: inherit;
   }
 
   &__bottom-box5 {

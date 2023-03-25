@@ -13,6 +13,7 @@ import callCenter from '../../assets/call-center.png';
 import Basket from "../Basket/Basket";
 import './Header.scss';
 
+
 const Header: React.FC = () => {
   return (
     <header className="header">
@@ -22,16 +23,16 @@ const Header: React.FC = () => {
             <div className="header__top-box">
               <div className="header__top-box-inner header__top-box-border">
                 <img src={locationIcon} alt="Location icon"/>
-                <div className="header__top-info">
-                  <p className="header__top-bold">г. Кокчетав, ул. Ж. Ташенова 129Б</p>
-                  <p className="header__top-regular">(Рынок Восточный)</p>
+                <div className="info header__info">
+                  <p className="info__bold info_bold-black">г. Кокчетав, ул. Ж. Ташенова 129Б</p>
+                  <p className="info__regular">(Рынок Восточный)</p>
                 </div>
               </div>
               <div className="header__top-box-inner">
                 <img src={mailIcon} alt="Mail icon"/>
-                <div className="header__top-info">
-                  <p className="header__top-bold">opt.sultan@mail.ru</p>
-                  <p className="header__top-regular">На связи в любое время</p>
+                <div className="info header__info">
+                  <p className="info__bold info_bold-black">opt.sultan@mail.ru</p>
+                  <p className="info__regular">На связи в любое время</p>
                 </div>
               </div>
             </div>
@@ -93,9 +94,11 @@ const Header: React.FC = () => {
               </form>
               <div className="header__bottom-box3">
                 <div className="header__bottom-box3-inner">
-                  <p className="header__bottom-box3-num">+7 (777) 490-00-91</p>
-                  <p className="header__bottom-box3-schedule">время работы: 9:00-20:00</p>
-                  <Link to={'/'} className="header__bottom-box3-link">Заказать звонок</Link>
+                  <div className="contacts header__contacts">
+                    <p className="contacts__num contacts_num-black">+7 (777) 490-00-91</p>
+                    <p className="contacts__schedule">время работы: 9:00-20:00</p>
+                    <Link to={'/'} className="contacts__link">Заказать звонок</Link>
+                  </div>
                 </div>
                 <img src={callCenter} alt="Operator"/>
               </div>

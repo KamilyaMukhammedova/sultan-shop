@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "styles/variables";
+@import "styles/mixins";
 
 *,
 *::before,
@@ -23,4 +24,53 @@ body {
 
 button:hover {
   cursor: pointer;
+}
+
+.contacts {
+  &__num {
+    font-weight: 600;
+    line-height: 21px;
+  }
+
+  &_num-black {
+    color: $black;
+  }
+
+  &__schedule {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  &__link {
+    font-size: 10px;
+    line-height: 15px;
+    color: inherit;
+  }
+}
+
+.info {
+  &__bold {
+    font-weight: 600;
+    line-height: 18.2px;
+    font-size: 14px;
+
+    @include large {
+      font-size: 12px;
+    }
+  }
+
+  &_bold-black {
+    color: $black;
+  }
+
+  &__regular {
+    font-weight: 300;
+    line-height: 15.6px;
+    font-size: 12px;
+  }
+}
+
+.info p {
+  margin: 0;
 }
