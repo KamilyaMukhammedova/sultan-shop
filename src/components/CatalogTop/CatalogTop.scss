@@ -1,0 +1,65 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.catalog-top {
+  &__box1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 40px;
+    line-height: 48px;
+    color: $black;
+  }
+
+  &__label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: $black;
+  }
+
+  &__select {
+    border-color: transparent;
+    background-color: transparent;
+    outline: none;
+    font-size: 16px !important;
+    line-height: 24px;
+    color: $grey3F;
+  }
+
+  &__filter {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__filter-div {
+    text-align: center;
+    word-break: break-word;
+    background-color: $white;
+    border-color: transparent;
+    line-height: 16.94px;
+    color: $grey3F;
+    border-radius: 5px;
+    padding: 10px 5px;
+
+    &:hover {
+      cursor: pointer;
+      color: $yellow;
+    }
+  }
+
+  &_filter1 {
+    width: 6.5%;
+  }
+
+  &_filter2 {
+    width: 10%;
+  }
+}
