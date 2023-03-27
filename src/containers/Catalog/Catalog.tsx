@@ -3,6 +3,7 @@ import CatalogTop from "../../components/CatalogTop/CatalogTop";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import './Catalog.scss';
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 const Catalog: React.FC = () => {
   const products = useTypedSelector((state) => state.products.products);
@@ -18,6 +19,9 @@ const Catalog: React.FC = () => {
   return (
     <div className="catalog">
       <CatalogTop/>
+      <div className="catalog__inner">
+        <Sidebar/>
+      </div>
     </div>
   );
 };

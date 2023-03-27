@@ -32,14 +32,17 @@
     color: $grey3F;
   }
 
-  &__filter {
+  &__filter-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
     display: flex;
     align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
   }
 
-  &__filter-div {
+  &__filter-item {
     text-align: center;
     word-break: break-word;
     background-color: $white;

@@ -22,14 +22,14 @@ const CatalogTop: React.FC = () => {
           </select>
         </div>
       </div>
-      <div className="catalog-top__filter">
+      <ul className="catalog-top__filter-list">
         {filterList.map((item, index) => {
-          if(index < 4) {
-            return <div key={index} className="catalog-top__filter-div catalog-top_filter1">{item}</div>
+          if (index < 4) {
+            return <li key={index} className="catalog-top__filter-item catalog-top_filter1">{item}</li>
           }
-          return <div key={index} className="catalog-top__filter-div catalog-top_filter2">{item}</div>
+          return <li key={index} className="catalog-top__filter-item catalog-top_filter2">{item}</li>
         })}
-      </div>
+      </ul>
     </section>
   );
 };

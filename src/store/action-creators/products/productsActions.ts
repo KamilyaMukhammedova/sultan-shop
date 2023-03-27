@@ -1,6 +1,12 @@
 import { Dispatch } from "redux";
 import axios from "axios";
-import { ApiProducts, ProductsActions, ProductsActionsTypes, ProductsMutation } from "../../../types/products";
+import {
+  ApiProducts,
+  Producers,
+  ProductsActions,
+  ProductsActionsTypes,
+  ProductsMutation
+} from "../../../types/products";
 
 const API_URL = 'https://sultan-shop-1c970-default-rtdb.europe-west1.firebasedatabase.app/catalog.json';
 
@@ -19,9 +25,25 @@ export const fetchProductsFromApi = () => {
           ...data[id],
           id
         }));
+
+        const producersObject: Producers = {};
+
+        productsArray.forEach(item => {
+          if(producersObject.hasOwnProperty(item.producer)) {
+            producersObject[item.producer]++;
+          } else {
+            producersObject[item.producer] = 1;
+          }
+        });
+
         dispatch({
           type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,
           payload: productsArray
+        });
+
+        dispatch({
+          type: ProductsActionsTypes.GET_ALL_PRODUCERS,
+          payload: producersObject
         });
       } else {
         dispatch({
