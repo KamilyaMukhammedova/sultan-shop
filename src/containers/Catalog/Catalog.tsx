@@ -23,21 +23,30 @@ const Catalog: React.FC = () => {
       <CatalogTop/>
       <div className="catalog__inner">
         <Sidebar/>
-        <section className="catalog__cards-div">
-          {products.map(item => (
-            <ProductCard
-              key={item.barcode}
-              image={item.image}
-              name={item.name}
-              sizeType={item.sizeType}
-              size={item.size}
-              barcode={item.barcode}
-              producer={item.producer}
-              brand={item.brand}
-              price={item.price}
-            />
-          ))}
-        </section>
+        <div className="catalog__main-content">
+          <section className="catalog__cards-div">
+            {products.map(item => (
+              <ProductCard
+                key={item.barcode}
+                image={item.image}
+                name={item.name}
+                sizeType={item.sizeType}
+                size={item.size}
+                barcode={item.barcode}
+                producer={item.producer}
+                brand={item.brand}
+                price={item.price}
+              />
+            ))}
+          </section>
+          <div className="catalog__pagination">Pagination will be here</div>
+          <p className="catalog__bottom-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam interdum ut justo,
+            vestibulum sagittis iaculis iaculis. Quis mattis vulputate feugiat massa vestibulum duis.
+            Faucibus consectetur aliquet sed pellentesque consequat consectetur congue mauris venenatis.
+            Nunc elit, dignissim sed nulla ullamcorper enim, malesuada.
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include small {
+      display: block;
+    }
   }
 
   &__title {
@@ -14,6 +18,31 @@
     font-size: 40px;
     line-height: 48px;
     color: $black;
+
+    @include large {
+      font-size: 35px;
+      line-height: 40px;
+    }
+
+    @include medium {
+      font-size: 30px;
+      line-height: 35px;
+    }
+
+    @include small {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  &__sorting {
+    @include medium {
+      width: 27%;
+    }
+
+    @include small {
+      width: 100%;
+    }
   }
 
   &__label {
@@ -21,6 +50,16 @@
     font-size: 16px;
     line-height: 24px;
     color: $black;
+
+    @include medium {
+      font-size: 14px;
+      line-height: 21px;
+    }
+
+    @include small {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   &__select {
@@ -30,6 +69,16 @@
     font-size: 16px !important;
     line-height: 24px;
     color: $grey3F;
+
+    @include medium {
+      font-size: 14px !important;
+      line-height: 21px;
+    }
+
+    @include small {
+      font-size: 16px !important;
+      line-height: 24px;
+    }
   }
 
   &__filter-list {
@@ -37,6 +86,18 @@
     align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    @include extraLarge {
+      justify-content: flex-start;
+    }
+
+    @include medium {
+      margin-top: 10px;
+    }
+
+    @include small {
+      display: none;
+    }
   }
 
   &__filter-item {
@@ -53,13 +114,50 @@
       cursor: pointer;
       color: $yellow;
     }
+
+    @include extraLarge {
+      margin: 0 10px 10px 0;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-break: normal;
+    }
+
+    @include medium {
+      font-size: 12px;
+    }
   }
 
   &_filter1 {
     width: 6.5%;
+
+    @include extraLarge {
+      width: 13%;
+    }
+
+    @include large {
+      width: 15%;
+    }
+
+    @include medium {
+      width: 18%;
+    }
   }
 
   &_filter2 {
     width: 10%;
+
+    @include extraLarge {
+      width: 13%;
+    }
+
+    @include large {
+      width: 15%;
+    }
+
+    @include medium {
+      width: 18%;
+    }
   }
 }
