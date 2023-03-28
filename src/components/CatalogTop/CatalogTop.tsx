@@ -1,12 +1,8 @@
 import React from 'react';
 import './CatalogTop.scss';
+import { FILTER_LIST } from "../../constants";
 
 const CatalogTop: React.FC = () => {
-  const filterList = [
-    'Уход за телом', 'Уход за руками', 'Уход за ногами', 'Уход за лицом', 'Уход за волосами', 'Средства для загара',
-    'Средства для бритья', 'Подарочные наборы', 'Гигиеническая продукция', 'Гигиена полости рта', 'Бумажная продукция',
-  ];
-
   return (
     <section className="catalog-top">
       <div className="catalog-top__box1">
@@ -23,7 +19,7 @@ const CatalogTop: React.FC = () => {
         </div>
       </div>
       <ul className="catalog-top__filter-list">
-        {filterList.map((item, index) => {
+        {FILTER_LIST.map((item, index) => {
           if (index < 4) {
             return <li key={index} className="catalog-top__filter-item catalog-top_filter1">{item}</li>
           }

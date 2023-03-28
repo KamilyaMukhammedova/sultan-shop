@@ -1,4 +1,4 @@
-interface Products {
+export interface Products {
   image: string,
   name: string,
   sizeType: string,
@@ -6,7 +6,7 @@ interface Products {
   barcode: number,
   producer: string,
   brand: string,
-  description: string;
+  description?: string;
   price: number,
   type: string[],
 }

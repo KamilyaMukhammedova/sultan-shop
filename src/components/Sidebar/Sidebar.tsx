@@ -3,7 +3,9 @@ import './Sidebar.scss';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import searchIcon from "../../assets/search-icon.png";
 import arrowDownIcon from "../../assets/arrow-down-icon.png";
+import trashIcon from "../../assets/trash-icon.png";
 import Spinner from "../ui/Spinner/Spinner";
+import { FILTER_LIST } from "../../constants";
 
 const Sidebar: React.FC = () => {
   const producers = useTypedSelector((state) => state.products.producers);
@@ -46,6 +48,17 @@ const Sidebar: React.FC = () => {
           <img src={arrowDownIcon} alt="Arrow down icon"/>
         </div>
       </div>
+      <div className="sidebar__show-results-div">
+        <button type="button" className="sidebar__show-results-btn">Показать</button>
+        <button type="button" className="sidebar__show-results-remove-btn">
+          <img src={trashIcon} alt="Trash icon"/>
+        </button>
+      </div>
+      <ul className="sidebar__filter-list">
+        {FILTER_LIST.map((item, index) => (
+          <li key={index} className="sidebar__filter-list-item">{item}</li>
+        ))}
+      </ul>
     </aside>
   );
 };

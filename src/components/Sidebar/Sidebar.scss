@@ -36,18 +36,26 @@
     font-size: 12px;
     line-height: 14.52px;
     width: 45%;
+    height: 23px;
+  }
+
+  &__mini-title,
+  &__filter-list-item {
+    font-size: 16px;
+    line-height: 24px;
   }
 
   &__mini-title {
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
     color: $black;
   }
 
   &__producer-filter {
-    border-bottom: 1px dashed rgba(63, 78, 101, 0.1);
     padding-bottom: 20px;
+  }
+
+  &__producer-search-form {
+    margin-bottom: 20px;
   }
 
   &__producer-search-div {
@@ -92,11 +100,13 @@
   &__producer-amount {
     font-size: 10px;
     line-height: 15px;
+    margin-left: 5px;
   }
 
   &__show-all {
     display: flex;
     align-items: center;
+    margin-top: 20px;
   }
 
   &__show-all-text {
@@ -104,5 +114,46 @@
     font-size: 12px;
     line-height: 18px;
     margin-right: 10px;
+  }
+
+  &__show-results-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__show-results-btn,
+  &__show-results-remove-btn {
+    border-color: transparent;
+    background-color: $yellow;
+  }
+
+  &__show-results-btn {
+    color: $white;
+    font-weight: 700;
+    line-height: 16.94px;
+    text-align: center;
+    padding: 15px 51px;
+    border-radius: 79px;
+  }
+
+  &__show-results-remove-btn {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+  }
+
+  &__filter-list {
+    margin-top: 20px;
+  }
+
+  &__filter-list-item {
+    margin-bottom: 10px;
+
+    &:hover {
+      cursor: pointer;
+      color: $yellow;
+    }
   }
 }
