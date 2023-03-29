@@ -35,6 +35,7 @@ export enum ProductsActionsTypes {
   FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS',
   FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE',
   GET_ALL_PRODUCERS = 'GET_ALL_PRODUCERS',
+  SORT_PRODUCTS = 'SORT_PRODUCTS',
 }
 
 export interface FetchProducts {
@@ -56,4 +57,10 @@ export interface GetAllProducers {
   payload: Producers,
 }
 
-export type ProductsActions = FetchProducts | FetchProductsSuccess | FetchProductsFailure | GetAllProducers;
+export interface SortProducts {
+  type: ProductsActionsTypes.SORT_PRODUCTS,
+  payload: ProductsMutation[],
+}
+
+export type ProductsActions =
+  FetchProducts | FetchProductsSuccess | FetchProductsFailure | GetAllProducers | SortProducts;

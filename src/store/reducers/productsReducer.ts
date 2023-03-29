@@ -17,6 +17,8 @@ export const productsReducer = (state = initialState, action: ProductsActions): 
       return {...state, fetchLoading: false, fetchError: action.payload};
     case ProductsActionsTypes.GET_ALL_PRODUCERS:
       return {...state, producers: action.payload};
+    case ProductsActionsTypes.SORT_PRODUCTS:
+      return {...state, products: action.payload};
     default:
       return state;
   }

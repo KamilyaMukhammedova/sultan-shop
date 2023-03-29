@@ -18,7 +18,6 @@ export const fetchProductsFromApi = () => {
       const response = await axios.get<ApiProducts | null>(API_URL);
 
       const data = response.data;
-      console.log(data);
 
       if (data) {
         const productsArray: ProductsMutation[] = Object.keys(data).map(id => ({
@@ -29,7 +28,7 @@ export const fetchProductsFromApi = () => {
         const producersObject: Producers = {};
 
         productsArray.forEach(item => {
-          if(producersObject.hasOwnProperty(item.producer)) {
+          if (producersObject.hasOwnProperty(item.producer)) {
             producersObject[item.producer]++;
           } else {
             producersObject[item.producer] = 1;
@@ -58,4 +57,31 @@ export const fetchProductsFromApi = () => {
       });
     }
   };
+};
+
+export const sortProducts = (value: string, productsArray: ProductsMutation[]) => {
+  return (dispatch: Dispatch<ProductsActions>) => {
+    const arrayCopy: ProductsMutation[] = [...productsArray];
+
+    if (value === 'A-Z') {
+      arrayCopy.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    if (value === 'Z-A') {
+      arrayCopy.sort((a, b) => b.name.localeCompare(a.name));
+    }
+
+    if (value === 'min-max') {
+      arrayCopy.sort((a, b) => a.price - b.price);
+    }
+
+    if (value === 'max-min') {
+      arrayCopy.sort((a, b) => b.price - a.price);
+    }
+
+    dispatch({
+      type: ProductsActionsTypes.SORT_PRODUCTS,
+      payload: arrayCopy
+    });
+  }
 };

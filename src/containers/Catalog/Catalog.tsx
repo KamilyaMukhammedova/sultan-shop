@@ -4,6 +4,8 @@ import { useActions } from "../../hooks/useActions";
 import CatalogTop from "../../components/CatalogTop/CatalogTop";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import Spinner from "../../components/ui/Spinner/Spinner";
+import ErrorMsg from "../../components/ui/ErrorMsg/ErrorMsg";
 import './Catalog.scss';
 
 const Catalog: React.FC = () => {
@@ -15,8 +17,34 @@ const Catalog: React.FC = () => {
 
   useEffect(() => {
     fetchProductsFromApi();
-    console.log(products);
   }, []);
+
+  let productsCards = null;
+
+  if (fetchLoading) {
+    productsCards = <Spinner/>;
+  }
+
+  if (fetchError) {
+    productsCards = <ErrorMsg message={fetchError}/>;
+  }
+
+  if (!fetchError && !fetchLoading && products.length > 0) {
+    productsCards = products.map(item => (
+        <ProductCard
+          key={item.barcode}
+          image={item.image}
+          name={item.name}
+          sizeType={item.sizeType}
+          size={item.size}
+          barcode={item.barcode}
+          producer={item.producer}
+          brand={item.brand}
+          price={item.price}
+        />
+      )
+    );
+  }
 
   return (
     <div className="catalog">
@@ -25,19 +53,7 @@ const Catalog: React.FC = () => {
         <Sidebar/>
         <div className="catalog__main-content">
           <section className="catalog__cards-div">
-            {products.map(item => (
-              <ProductCard
-                key={item.barcode}
-                image={item.image}
-                name={item.name}
-                sizeType={item.sizeType}
-                size={item.size}
-                barcode={item.barcode}
-                producer={item.producer}
-                brand={item.brand}
-                price={item.price}
-              />
-            ))}
+            {productsCards}
           </section>
           <div className="catalog__pagination">Pagination will be here</div>
           <p className="catalog__bottom-text">
