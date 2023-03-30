@@ -1,12 +1,12 @@
 import React from 'react';
 import { useActions } from "../../hooks/useActions";
-import { ProductsMutation } from "../../types/products";
-import volumeIcon from '../../assets/volume-icon.png';
-import weightIcon from '../../assets/weight-icon.png';
-import basketIcon from '../../assets/basket-white-icon.png';
+import { ProductMutation } from "../../types/products";
+import basketIcon from '../../assets/icons/basket-white-icon.png';
+import Size from "../Size/Size";
 import './ProductCard.scss';
+import { Link } from "react-router-dom";
 
-type IProps = Omit<ProductsMutation, 'description'|'type'>;
+type IProps = Omit<ProductMutation, 'description' | 'type'>;
 
 const ProductCard: React.FC<IProps> = (props) => {
   const {addToBasket} = useActions();
@@ -21,20 +21,14 @@ const ProductCard: React.FC<IProps> = (props) => {
         <img src={props.image} alt={props.name} className="productCard__image"/>
       </div>
       <div className="productCard__size-div">
-        <img
-          src={props.sizeType === 'volume' ? volumeIcon : weightIcon}
-          alt="Size type icon"
-          className="productCard__size-type-icon"
-        />
-        <span className="productCard__size-text">{props.size}</span>
-        <span className="productCard__size-text">
-          {props.sizeType === 'volume' ? 'мл' : 'г'}
-        </span>
+        <Size sizeType={props.sizeType} size={props.size}/>
       </div>
-      <h6 className="productCard__name">
-        <span className="productCard__brand">{props.brand}</span>
-        <span>{props.name}</span>
-      </h6>
+      <Link to={'/product/' + props.id} className="productCard__linkTo">
+        <h6 className="productCard__name">
+          <span className="productCard__brand">{props.brand}</span>
+          <span>{props.name}</span>
+        </h6>
+      </Link>
       <div className="productCard__inner">
         <p className="productCard__info">
           Штрихкод:

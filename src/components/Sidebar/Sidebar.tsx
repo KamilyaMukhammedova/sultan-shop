@@ -3,9 +3,9 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import { FILTER_LIST } from "../../constants";
 import Spinner from "../ui/Spinner/Spinner";
-import searchIcon from "../../assets/search-icon.png";
-import arrowDownIcon from "../../assets/arrow-down-icon.png";
-import trashIcon from "../../assets/trash-icon.png";
+import searchIcon from "../../assets/icons/search-icon.png";
+import arrowDownIcon from "../../assets/icons/arrow-down-icon.png";
+import trashIcon from "../../assets/icons/trash-icon.png";
 import './Sidebar.scss';
 
 const Sidebar: React.FC = () => {

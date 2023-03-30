@@ -30,15 +30,7 @@
   }
 
   &__size-div {
-    display: flex;
-    align-items: center;
     margin-top: 10px;
-  }
-
-  &__size-text {
-    font-size: 12px;
-    line-height: 15.6px;
-    margin-left: 5px;
   }
 
   &__name {
@@ -102,5 +94,14 @@
 
   &__basket-btn-text {
     margin-right: 5px;
+  }
+
+  &__linkTo {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: inherit;
+    }
   }
 }

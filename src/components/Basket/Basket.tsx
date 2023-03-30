@@ -1,5 +1,5 @@
 import React from 'react';
-import basketIcon from '../../assets/basket-icon.png';
+import basketIcon from '../../assets/icons/basket-icon.png';
 import './Basket.scss';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 

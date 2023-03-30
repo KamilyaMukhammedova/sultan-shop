@@ -1,27 +1,26 @@
 import { Dispatch } from "redux";
-import axios from "axios";
 import {
   ApiProducts,
   Producers,
+  Product,
+  ProductMutation,
   ProductsActions,
-  ProductsActionsTypes,
-  ProductsMutation
+  ProductsActionsTypes
 } from "../../../types/products";
 import { store } from "../../index";
-
-const API_URL = 'https://sultan-shop-1c970-default-rtdb.europe-west1.firebasedatabase.app/catalog.json';
+import axiosApi from "../../../axiosApi";
 
 export const fetchProductsFromApi = () => {
   return async (dispatch: Dispatch<ProductsActions>) => {
     try {
       dispatch({type: ProductsActionsTypes.FETCH_PRODUCTS});
 
-      const response = await axios.get<ApiProducts | null>(API_URL);
+      const response = await axiosApi.get<ApiProducts | null>('/catalog.json');
 
       const data = response.data;
 
       if (data) {
-        const productsArray: ProductsMutation[] = Object.keys(data).map(id => ({
+        const productsArray: ProductMutation[] = Object.keys(data).map(id => ({
           ...data[id],
           id
         }));
@@ -60,9 +59,32 @@ export const fetchProductsFromApi = () => {
   };
 };
 
-export const sortProducts = (value: string, productsArray: ProductsMutation[]) => {
+export const fetchOneProductFromApi = (productId: string) => {
+  return async (dispatch: Dispatch<ProductsActions>) => {
+    try {
+      dispatch({type: ProductsActionsTypes.FETCH_ONE_PRODUCT});
+      const response = await axiosApi.get<Product | null>(`/catalog/${productId}.json`);
+
+      if(response.data) {
+        dispatch({
+          type: ProductsActionsTypes.FETCH_ONE_PRODUCT_SUCCESS,
+          payload: response.data
+        });
+      } else {
+        return new Error();
+      }
+    } catch (e) {
+      dispatch({
+        type: ProductsActionsTypes.FETCH_ONE_PRODUCT_FAILURE,
+        payload: 'Товар с данным идентификатором отсутствует'
+      });
+    }
+  }
+};
+
+export const sortProducts = (value: string, productsArray: ProductMutation[]) => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const arrayCopy: ProductsMutation[] = [...productsArray];
+    const arrayCopy: ProductMutation[] = [...productsArray];
 
     if (value === 'A-Z') {
       arrayCopy.sort((a, b) => a.name.localeCompare(b.name));
@@ -99,7 +121,7 @@ export const filterProducts = (priceFrom: number, priceTo: number, producers: st
     const productsArray = store.getState().products.products;
     const productsArrayCopy = [...productsArray];
 
-    let filteredProducts: ProductsMutation[] = [];
+    let filteredProducts: ProductMutation[] = [];
 
     if (producers.length > 0) {
       filteredProducts = productsArrayCopy.filter(product => {

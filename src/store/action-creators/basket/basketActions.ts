@@ -2,7 +2,7 @@ import { store } from "../../index";
 import { BasketActions, BasketActionsTypes, BasketProduct } from "../../../types/basket";
 import { Dispatch } from "redux";
 
-export const addToBasket = (productId: string, price: number) => {
+export const addToBasket = (productId: string, price: number, amount = 1) => {
   return (dispatch: Dispatch<BasketActions>) => {
     const basketArray = store.getState().basket.basket;
     let newBasketArray: BasketProduct[] = [];
@@ -14,14 +14,14 @@ export const addToBasket = (productId: string, price: number) => {
         if (item.id === productId) {
           return {
             ...item,
-            amount: item.amount + 1
+            amount: item.amount + amount
           }
         }
 
         return item;
       });
     } else {
-      newBasketArray = [...basketArray, {id: productId, price, amount: 1}];
+      newBasketArray = [...basketArray, {id: productId, price, amount}];
     }
 
     const totalAmount = newBasketArray.reduce((acc, item) => acc + item.amount, 0);

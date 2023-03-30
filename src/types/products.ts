@@ -1,4 +1,4 @@
-export interface Products {
+export interface Product {
   image: string,
   name: string,
   sizeType: string,
@@ -16,26 +16,32 @@ export interface Producers {
 }
 
 export interface ApiProducts {
-  [id: string]: Products
+  [id: string]: Product
 }
 
-export interface ProductsMutation extends Products {
+export interface ProductMutation extends Product {
   id: string;
 }
 
 export interface ProductsState {
-  products: ProductsMutation[];
-  productsFromApi: ProductsMutation[];
+  products: ProductMutation[],
+  productsFromApi: ProductMutation[],
   producers: Producers | null,
   producersFromApi: Producers | null,
-  fetchLoading: boolean;
-  fetchError: null | string;
+  oneProduct: Product | null,
+  oneProductFetchLoading: boolean,
+  oneProductFetchError: null | string,
+  fetchLoading: boolean,
+  fetchError: null | string,
 }
 
 export enum ProductsActionsTypes {
   FETCH_PRODUCTS = 'FETCH_PRODUCTS',
   FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS',
   FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE',
+  FETCH_ONE_PRODUCT = 'FETCH_ONE_PRODUCT',
+  FETCH_ONE_PRODUCT_SUCCESS = 'FETCH_ONE_PRODUCT_SUCCESS',
+  FETCH_ONE_PRODUCT_FAILURE = 'FETCH_ONE_PRODUCT_FAILURE',
   GET_ALL_PRODUCERS = 'GET_ALL_PRODUCERS',
   SORT_PRODUCTS = 'SORT_PRODUCTS',
   FILTER_PRODUCTS = 'FILTER_PRODUCTS',
@@ -50,11 +56,25 @@ export interface FetchProducts {
 
 export interface FetchProductsSuccess {
   type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,
-  payload: ProductsMutation[],
+  payload: ProductMutation[],
 }
 
 export interface FetchProductsFailure {
   type: ProductsActionsTypes.FETCH_PRODUCTS_FAILURE,
+  payload: string,
+}
+
+export interface FetchOneProduct {
+  type: ProductsActionsTypes.FETCH_ONE_PRODUCT,
+}
+
+export interface FetchOneProductSuccess {
+  type: ProductsActionsTypes.FETCH_ONE_PRODUCT_SUCCESS,
+  payload: Product | null,
+}
+
+export interface FetchOneProductFailure {
+  type: ProductsActionsTypes.FETCH_ONE_PRODUCT_FAILURE,
   payload: string,
 }
 
@@ -65,17 +85,17 @@ export interface GetAllProducers {
 
 export interface SortProducts {
   type: ProductsActionsTypes.SORT_PRODUCTS,
-  payload: ProductsMutation[],
+  payload: ProductMutation[],
 }
 
 export interface FilterProducts {
   type: ProductsActionsTypes.FILTER_PRODUCTS,
-  payload: ProductsMutation[],
+  payload: ProductMutation[],
 }
 
 export interface RefreshProductsArray {
   type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
-  payload: ProductsMutation[],
+  payload: ProductMutation[],
 }
 
 export interface FilterProducers {
@@ -90,5 +110,7 @@ export interface RefreshProducers {
 
 export type ProductsActions =
   FetchProducts | FetchProductsSuccess | FetchProductsFailure |
-  GetAllProducers | SortProducts | FilterProducts | RefreshProductsArray | FilterProducers | RefreshProducers
+  GetAllProducers | SortProducts | FilterProducts |
+  RefreshProductsArray | FilterProducers | RefreshProducers |
+  FetchOneProduct | FetchOneProductSuccess | FetchOneProductFailure
   ;

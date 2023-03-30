@@ -80,3 +80,32 @@ ul {
 .info p {
   margin: 0;
 }
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  &__number {
+    font-weight: 500;
+    line-height: 18.2px;
+    margin: 0 10px;
+  }
+
+  &__btn {
+    display: inline-block;
+    padding: 3px 15px;
+    background: linear-gradient(90deg, rgba(255, 198, 80, 0.3) 0%, rgba(254, 202, 110, 0.3) 97.25%);
+    border-color: transparent;
+    border-radius: 15px;
+  }
+}

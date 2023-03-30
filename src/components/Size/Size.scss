@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.size {
+  display: flex;
+  align-items: center;
+  color: $grey3F;
+
+  &__text {
+    font-size: 12px;
+    line-height: 15.6px;
+    margin-left: 5px;
+  }
+}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo-white.png';
-import arrowRightIcon from '../../assets/arrow-right-icon.png';
-import priceListIcon from "../../assets/price-list-icon.png";
-import whatsAppIcon from "../../assets/whatsApp-icon.png";
-import telegramIcon from "../../assets/telegram-icon.png";
+import arrowRightIcon from '../../assets/icons/arrow-right-icon.png';
+import priceListIcon from "../../assets/icons/price-list-icon.png";
+import whatsAppIcon from "../../assets/icons/whatsApp-icon.png";
+import telegramIcon from "../../assets/icons/telegram-icon.png";
 import visa from "../../assets/visa.png";
 import mastercard from "../../assets/mastercard.png";
 import './Footer.scss';
