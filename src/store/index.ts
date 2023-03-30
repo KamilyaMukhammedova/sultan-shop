@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore } from "redux";
-import { rootReducers } from "./reducers/reducer";
+import { rootReducers } from "./reducers";
 import thunk from "redux-thunk";
 
 declare global {

@@ -9,9 +9,7 @@ import ErrorMsg from "../../components/ui/ErrorMsg/ErrorMsg";
 import './Catalog.scss';
 
 const Catalog: React.FC = () => {
-  const products = useTypedSelector((state) => state.products.products);
-  const fetchLoading = useTypedSelector((state) => state.products.fetchLoading);
-  const fetchError = useTypedSelector((state) => state.products.fetchError);
+  const {products, fetchLoading, fetchError} = useTypedSelector((state) => state.products);
 
   const {fetchProductsFromApi} = useActions();
 
@@ -33,6 +31,7 @@ const Catalog: React.FC = () => {
     productsCards = products.map(item => (
         <ProductCard
           key={item.barcode}
+          id={item.id}
           image={item.image}
           name={item.name}
           sizeType={item.sizeType}

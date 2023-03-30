@@ -1,13 +1,20 @@
 import React from 'react';
-import { Products } from "../../types/products";
+import { useActions } from "../../hooks/useActions";
+import { ProductsMutation } from "../../types/products";
 import volumeIcon from '../../assets/volume-icon.png';
 import weightIcon from '../../assets/weight-icon.png';
 import basketIcon from '../../assets/basket-white-icon.png';
 import './ProductCard.scss';
 
-type IProps = Omit<Products, 'description' | 'type'>;
+type IProps = Omit<ProductsMutation, 'description'|'type'>;
 
 const ProductCard: React.FC<IProps> = (props) => {
+  const {addToBasket} = useActions();
+
+  const onAddBtn = () => {
+    addToBasket(props.id, props.price);
+  };
+
   return (
     <div className="productCard">
       <div className="productCard__image-div">
@@ -44,7 +51,7 @@ const ProductCard: React.FC<IProps> = (props) => {
       </div>
       <div className="productCard__inner2">
         <span className="productCard__price">{props.price} ₸</span>
-        <button type="button" className="productCard__basket-btn">
+        <button type="button" className="productCard__basket-btn" onClick={onAddBtn}>
           <span className="productCard__basket-btn-text">В корзину</span>
           <img src={basketIcon} alt="Basket icon"/>
         </button>
