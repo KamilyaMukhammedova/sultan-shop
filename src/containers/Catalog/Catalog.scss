@@ -4,12 +4,6 @@
 .catalog {
   padding: 20px 0;
 
-  &__inner,
-  &__cards-div {
-    display: flex;
-    justify-content: space-between;
-  }
-
   &__main-content {
     width: 75%;
 
@@ -28,6 +22,8 @@
 
   &__inner {
     margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
 
     @include small {
       display: block;
@@ -35,6 +31,8 @@
   }
 
   &__cards-div {
+    display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
 
     @include small {

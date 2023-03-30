@@ -7,6 +7,7 @@ import {
   ProductsActionsTypes,
   ProductsMutation
 } from "../../../types/products";
+import { store } from "../../index";
 
 const API_URL = 'https://sultan-shop-1c970-default-rtdb.europe-west1.firebasedatabase.app/catalog.json';
 
@@ -82,6 +83,37 @@ export const sortProducts = (value: string, productsArray: ProductsMutation[]) =
     dispatch({
       type: ProductsActionsTypes.SORT_PRODUCTS,
       payload: arrayCopy
+    });
+  }
+};
+
+export const filterProducts = (priceFrom: number, priceTo: number, producers: string[]) => {
+  return (dispatch: Dispatch<ProductsActions>) => {
+    const apiProductsArray = store.getState().products.productsFromApi;
+
+    dispatch({
+      type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
+      payload: [...apiProductsArray]
+    });
+
+    const productsArray = store.getState().products.products;
+    const productsArrayCopy = [...productsArray];
+
+    let filteredProducts: ProductsMutation[] = [];
+
+    if (producers.length > 0) {
+      filteredProducts = productsArrayCopy.filter(product => {
+        return product.price >= priceFrom && product.price <= priceTo && producers.includes(product.producer);
+      });
+    } else {
+      filteredProducts = productsArrayCopy.filter(product => {
+        return product.price >= priceFrom && product.price <= priceTo;
+      });
+    }
+
+    dispatch({
+      type: ProductsActionsTypes.FILTER_PRODUCTS,
+      payload: filteredProducts
     });
   }
 };
