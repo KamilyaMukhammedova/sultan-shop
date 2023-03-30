@@ -117,3 +117,42 @@ export const filterProducts = (priceFrom: number, priceTo: number, producers: st
     });
   }
 };
+
+export const filterProducers = (value: string) => {
+  return (dispatch: Dispatch<ProductsActions>) => {
+    const producers = store.getState().products.producers;
+
+     if(producers) {
+       const producerObj = Object.fromEntries(Object.entries(producers)
+         .filter(([key]) => key.includes(value)))
+       ;
+
+       dispatch({
+         type: ProductsActionsTypes.FILTER_PRODUCERS,
+         payload: producerObj
+       });
+     }
+  }
+};
+
+export const refreshProducers = () => {
+  return (dispatch: Dispatch<ProductsActions>) => {
+    const apiProducers = store.getState().products.producersFromApi;
+
+    dispatch({
+      type: ProductsActionsTypes.REFRESH_PRODUCERS,
+      payload: {...apiProducers}
+    });
+  }
+};
+
+export const refreshProducts = () => {
+  return (dispatch: Dispatch<ProductsActions>) => {
+    const apiProductsArray = store.getState().products.productsFromApi;
+
+    dispatch({
+      type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
+      payload: [...apiProductsArray]
+    });
+  }
+};

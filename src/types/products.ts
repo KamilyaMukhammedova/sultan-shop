@@ -27,6 +27,7 @@ export interface ProductsState {
   products: ProductsMutation[];
   productsFromApi: ProductsMutation[];
   producers: Producers | null,
+  producersFromApi: Producers | null,
   fetchLoading: boolean;
   fetchError: null | string;
 }
@@ -39,6 +40,8 @@ export enum ProductsActionsTypes {
   SORT_PRODUCTS = 'SORT_PRODUCTS',
   FILTER_PRODUCTS = 'FILTER_PRODUCTS',
   REFRESH_PRODUCTS_ARRAY = 'REFRESH_PRODUCTS_ARRAY',
+  REFRESH_PRODUCERS = 'REFRESH_PRODUCERS',
+  FILTER_PRODUCERS = 'FILTER_PRODUCERS',
 }
 
 export interface FetchProducts {
@@ -75,7 +78,17 @@ export interface RefreshProductsArray {
   payload: ProductsMutation[],
 }
 
+export interface FilterProducers {
+  type: ProductsActionsTypes.FILTER_PRODUCERS,
+  payload: Producers,
+}
+
+export interface RefreshProducers {
+  type: ProductsActionsTypes.REFRESH_PRODUCERS,
+  payload: Producers,
+}
+
 export type ProductsActions =
   FetchProducts | FetchProductsSuccess | FetchProductsFailure |
-  GetAllProducers | SortProducts | FilterProducts | RefreshProductsArray
+  GetAllProducers | SortProducts | FilterProducts | RefreshProductsArray | FilterProducers | RefreshProducers
   ;

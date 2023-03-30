@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
 import { FILTER_LIST } from "../../constants";
 import Spinner from "../ui/Spinner/Spinner";
 import searchIcon from "../../assets/search-icon.png";
 import arrowDownIcon from "../../assets/arrow-down-icon.png";
 import trashIcon from "../../assets/trash-icon.png";
 import './Sidebar.scss';
-import { useActions } from "../../hooks/useActions";
 
 const Sidebar: React.FC = () => {
   const producers = useTypedSelector((state) => state.products.producers);
   const fetchLoading = useTypedSelector((state) => state.products.fetchLoading);
-  const {filterProducts} = useActions();
-
+  const {filterProducts, filterProducers, refreshProducts, refreshProducers} = useActions();
 
   const [priceFilter, setPriceFilter] = useState({
     priceFrom: 0,
@@ -20,6 +19,32 @@ const Sidebar: React.FC = () => {
   });
 
   const [producersFilter, setProducersFilter] = useState<{ [key: string]: boolean }>({});
+
+  const [producerSearch, setProducerSearch] = useState('');
+
+  // const getProducersFilterInitialState = () => {
+  //   const producersChecked: { [key: string]: boolean } = {};
+  //
+  //   producers && Object.keys(producers).forEach((item) => {
+  //     if (!producersChecked.hasOwnProperty(item)) {
+  //       producersChecked[item] = false;
+  //     }
+  //   });
+  //
+  //   setProducersFilter(producersChecked);
+  // };
+
+  useEffect(() => {
+    const producersChecked: { [key: string]: boolean } = {};
+
+    producers && Object.keys(producers).forEach((item) => {
+      if (!producersChecked.hasOwnProperty(item)) {
+        producersChecked[item] = false;
+      }
+    });
+
+    setProducersFilter(producersChecked);
+  }, [producers]);
 
   const onPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
@@ -41,21 +66,40 @@ const Sidebar: React.FC = () => {
     })));
   };
 
-  const onShowResultsBtn = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onShowResultsBtn = () => {
     const producersObj = Object.fromEntries(Object.entries(producersFilter)
       .filter(([key]) => producersFilter[key]))
     ;
     const producersNamesArray = Object.keys(producersObj);
 
-    if(+priceFilter.priceFrom <= +priceFilter.priceTo) {
+    if (+priceFilter.priceFrom <= +priceFilter.priceTo) {
       filterProducts(+priceFilter.priceFrom, +priceFilter.priceTo, producersNamesArray);
     } else {
       filterProducts(+priceFilter.priceTo, +priceFilter.priceFrom, producersNamesArray);
     }
   };
 
+  const onProducerSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setProducerSearch(event.target.value);
+  };
 
-  useEffect(() => {
+  const onProducerSearchBtn = () => {
+    if(producerSearch) {
+      filterProducers(producerSearch);
+    }
+  };
+
+  const onRemoveFilter = () => {
+    refreshProducts();
+    refreshProducers();
+
+    setPriceFilter({
+      priceFrom: 0,
+      priceTo: 10000
+    });
+
+    setProducerSearch('');
+
     const producersChecked: { [key: string]: boolean } = {};
 
     producers && Object.keys(producers).forEach((item) => {
@@ -65,7 +109,7 @@ const Sidebar: React.FC = () => {
     });
 
     setProducersFilter(producersChecked);
-    }, [producers]);
+  };
 
   return (
     <aside className="sidebar">
@@ -94,8 +138,15 @@ const Sidebar: React.FC = () => {
         <h5 className="sidebar__mini-title">Производитель</h5>
         <form className="sidebar__producer-search-form">
           <div className="sidebar__producer-search-div">
-            <input type="text" name="search" placeholder="Поиск..." className="sidebar__producer-search-input"/>
-            <button className="sidebar__producer-search-btn">
+            <input
+              type="text"
+              name="producerSearch"
+              value={producerSearch}
+              placeholder="Поиск..."
+              className="sidebar__producer-search-input"
+              onChange={onProducerSearchInput}
+            />
+            <button type="button" className="sidebar__producer-search-btn" onClick={onProducerSearchBtn}>
               <img src={searchIcon} alt="Search icon" className="sidebar__producer__search-icon"/>
             </button>
           </div>
@@ -107,6 +158,7 @@ const Sidebar: React.FC = () => {
                 type="checkbox"
                 name="producer"
                 value={keyName}
+                checked={producersFilter[keyName] || false}
                 className="sidebar__producer-checkbox-input"
                 onChange={onProducerCheck}
               />
@@ -127,7 +179,7 @@ const Sidebar: React.FC = () => {
         >
           Показать
         </button>
-        <button type="button" className="sidebar__show-results-remove-btn">
+        <button type="button" className="sidebar__show-results-remove-btn" onClick={onRemoveFilter}>
           <img src={trashIcon} alt="Trash icon"/>
         </button>
       </div>

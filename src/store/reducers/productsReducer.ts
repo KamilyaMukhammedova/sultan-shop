@@ -4,6 +4,7 @@ const initialState: ProductsState = {
   products: [],
   productsFromApi: [],
   producers: null,
+  producersFromApi: null,
   fetchLoading: false,
   fetchError: null,
 };
@@ -17,13 +18,17 @@ export const productsReducer = (state = initialState, action: ProductsActions): 
     case ProductsActionsTypes.FETCH_PRODUCTS_FAILURE:
       return {...state, fetchLoading: false, fetchError: action.payload};
     case ProductsActionsTypes.GET_ALL_PRODUCERS:
-      return {...state, producers: action.payload};
+      return {...state, producers: action.payload, producersFromApi: action.payload};
     case ProductsActionsTypes.SORT_PRODUCTS:
       return {...state, products: action.payload};
     case ProductsActionsTypes.FILTER_PRODUCTS:
       return {...state, products: action.payload};
     case ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY:
       return {...state, products: action.payload};
+    case ProductsActionsTypes.FILTER_PRODUCERS:
+      return {...state, producers: action.payload};
+    case ProductsActionsTypes.REFRESH_PRODUCERS:
+      return {...state, producers: action.payload};
     default:
       return state;
   }
