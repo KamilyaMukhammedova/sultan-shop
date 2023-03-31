@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useActions } from "../../hooks/useActions";
 import CatalogTop from "../../components/CatalogTop/CatalogTop";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import ProductCard from "../../components/ProductCard/ProductCard";
@@ -10,12 +9,6 @@ import './Catalog.scss';
 
 const Catalog: React.FC = () => {
   const {products, fetchLoading, fetchError} = useTypedSelector((state) => state.products);
-
-  const {fetchProductsFromApi} = useActions();
-
-  useEffect(() => {
-    fetchProductsFromApi();
-  }, []);
 
   let productsCards = null;
 

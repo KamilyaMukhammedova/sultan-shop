@@ -18,27 +18,6 @@ const SingleProductCard: React.FC<Product> = (props) => {
   const [descriptionIsHidden, setDescriptionIsHidden] = useState(false);
   const [fullInfoIsHidden, setFullInfoIsHidden] = useState(false);
 
-  const productInfo = (
-    <>
-      <p className="singleProductCard__info-text">
-        Производитель:
-        <span className="singleProductCard__info-bold">{props.producer}</span>
-      </p>
-      <p className="singleProductCard__info-text">
-        Бренд:
-        <span className="singleProductCard__info-bold">{props.brand}</span>
-      </p>
-      <p className="singleProductCard__info-text">
-        Артикул:
-        <span className="singleProductCard__info-bold">{props.barcode}</span>
-      </p>
-      <p className="singleProductCard__info-text">
-        Штрихкод:
-        <span className="singleProductCard__info-bold">{props.barcode}</span>
-      </p>
-    </>
-  );
-
   const onToggleDescription = () => {
     setDescriptionIsHidden(prevState => !prevState);
   };
@@ -60,8 +39,29 @@ const SingleProductCard: React.FC<Product> = (props) => {
   };
 
   const addProductToBasket = () => {
-    addToBasket(id, props.price, amount);
+    addToBasket(id, amount);
   };
+
+  const productInfo = (
+    <>
+      <p className="singleProductCard__info-text">
+        Производитель:
+        <span className="singleProductCard__info-bold">{props.producer}</span>
+      </p>
+      <p className="singleProductCard__info-text">
+        Бренд:
+        <span className="singleProductCard__info-bold">{props.brand}</span>
+      </p>
+      <p className="singleProductCard__info-text">
+        Артикул:
+        <span className="singleProductCard__info-bold">{props.barcode}</span>
+      </p>
+      <p className="singleProductCard__info-text">
+        Штрихкод:
+        <span className="singleProductCard__info-bold">{props.barcode}</span>
+      </p>
+    </>
+  );
 
   return (
     <section className="singleProductCard">
@@ -86,7 +86,7 @@ const SingleProductCard: React.FC<Product> = (props) => {
           </div>
           <button type="button" className="singleProductCard__basket-btn" onClick={addProductToBasket}>
             <span className="singleProductCard__basket-btn-text">В корзину</span>
-            <img src={basketIcon} alt="Basket icon"/>
+            <img src={basketIcon} alt="MiniBasket icon"/>
           </button>
         </div>
         <div className="singleProductCard__box2">

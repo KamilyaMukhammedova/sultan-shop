@@ -44,11 +44,14 @@ export const fetchProductsFromApi = () => {
           type: ProductsActionsTypes.GET_ALL_PRODUCERS,
           payload: producersObject
         });
+
+        localStorage.setItem('catalogProducts', JSON.stringify(productsArray));
       } else {
         dispatch({
           type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,
           payload: []
         });
+        localStorage.setItem('catalogProducts', JSON.stringify([]));
       }
     } catch (e) {
       dispatch({
@@ -82,9 +85,11 @@ export const fetchOneProductFromApi = (productId: string) => {
   }
 };
 
-export const sortProducts = (value: string, productsArray: ProductMutation[]) => {
+export const sortProducts = (value: string) => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const arrayCopy: ProductMutation[] = [...productsArray];
+    const products = store.getState().products.products;
+
+    const arrayCopy: ProductMutation[] = [...products];
 
     if (value === 'A-Z') {
       arrayCopy.sort((a, b) => a.name.localeCompare(b.name));
@@ -111,11 +116,11 @@ export const sortProducts = (value: string, productsArray: ProductMutation[]) =>
 
 export const filterProducts = (priceFrom: number, priceTo: number, producers: string[]) => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const apiProductsArray = store.getState().products.productsFromApi;
+    const productsLocalStorage = store.getState().products.productsLocalStorage;
 
     dispatch({
       type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
-      payload: [...apiProductsArray]
+      payload: [...productsLocalStorage]
     });
 
     const productsArray = store.getState().products.products;
@@ -159,22 +164,22 @@ export const filterProducers = (value: string) => {
 
 export const refreshProducers = () => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const apiProducers = store.getState().products.producersFromApi;
+    const producersFullList = store.getState().products.producersFullList;
 
     dispatch({
       type: ProductsActionsTypes.REFRESH_PRODUCERS,
-      payload: {...apiProducers}
+      payload: {...producersFullList}
     });
   }
 };
 
 export const refreshProducts = () => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const apiProductsArray = store.getState().products.productsFromApi;
+    const productsLocalStorage = store.getState().products.productsLocalStorage;
 
     dispatch({
       type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
-      payload: [...apiProductsArray]
+      payload: [...productsLocalStorage]
     });
   }
 };

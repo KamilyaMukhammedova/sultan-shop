@@ -1,0 +1,98 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.modal {
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__box {
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 20px;
+    left: 15%;
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+    border-radius: 10px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+
+    @include large {
+      padding: 1rem;
+    }
+
+    @include medium {
+      padding: 10px;
+    }
+  }
+
+  &__text-bold {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    color: $black;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+    @include medium {
+      font-size: 30px;
+      line-height: 38px;
+    }
+
+    @include small {
+      font-size: 16px;
+      line-height: 21px;
+    }
+  }
+
+  &__text {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+
+    @include medium {
+      font-size: 16px;
+      line-height: 21px;
+    }
+
+    @include small {
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+
+  &__close-div {
+    text-align: right;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__icon-div {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 50px;
+    background-color: $yellow;
+    text-align: center;
+    margin: 0 auto;
+  }
+}

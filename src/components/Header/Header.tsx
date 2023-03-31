@@ -10,9 +10,8 @@ import priceListIcon from '../../assets/icons/price-list-icon.png';
 import menuIcon from '../../assets/icons/menu-icon.png';
 import logo from '../../assets/logo-grey.png';
 import callCenter from '../../assets/call-center.png';
-import Basket from "../Basket/Basket";
+import MiniBasket from "../MiniBasket/MiniBasket";
 import './Header.scss';
-
 
 const Header: React.FC = () => {
   return (
@@ -67,7 +66,9 @@ const Header: React.FC = () => {
                 <img src={logo} alt="Logo" className="header__logo-img"/>
               </NavLink>
               <div className="header__basket-hidden">
-                <Basket/>
+                <Link to={'/basket'} className="header__link">
+                  <MiniBasket/>
+                </Link>
               </div>
             </div>
             <div className="header__divider header__divider-hidden"/>
@@ -109,7 +110,9 @@ const Header: React.FC = () => {
                 </button>
               </div>
               <div className="header__bottom-box5">
-                <Basket/>
+                <Link to={'/basket'} className="header__link">
+                  <MiniBasket/>
+                </Link>
               </div>
             </div>
           </div>

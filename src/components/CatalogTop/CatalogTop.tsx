@@ -1,16 +1,14 @@
 import React from 'react';
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import { FILTER_LIST } from "../../constants";
 import './CatalogTop.scss';
 
 const CatalogTop: React.FC = () => {
-  const products = useTypedSelector((state) => state.products.products);
   const {sortProducts} = useActions();
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    sortProducts(value, products);
+    sortProducts(value);
   };
 
   return (

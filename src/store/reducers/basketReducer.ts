@@ -15,6 +15,20 @@ export const basketReducer = (state = initialState, action: BasketActions): Bask
         totalSum: action.payload.totalSum,
         totalAmount: action.payload.totalAmount
       };
+    case BasketActionsTypes.DECREASE_PRODUCT_AMOUNT_IN_BASKET:
+      return {
+        ...state,
+        basket: action.payload.basket,
+        totalSum: action.payload.totalSum,
+        totalAmount: action.payload.totalAmount
+      };
+    case BasketActionsTypes.REMOVE_PRODUCT_FROM_BASKET:
+      return {
+        ...state,
+        basket: action.payload.basket,
+        totalSum: action.payload.totalSum,
+        totalAmount: action.payload.totalAmount
+      };
     default:
       return state;
   }
