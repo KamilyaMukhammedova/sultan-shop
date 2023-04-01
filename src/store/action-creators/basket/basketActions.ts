@@ -12,7 +12,7 @@ const countTotalSum = (arr: BasketProduct[]) => {
 
 export const addToBasket = (productId: string, amount = 1) => {
   return (dispatch: Dispatch<BasketActions>) => {
-    const productsLocalStorage = store.getState().products.productsLocalStorage;
+    const productsLocalStorage = store.getState().products.productsApi;
     const basketArray = store.getState().basket.basket;
 
     let copyBasketArray: BasketProduct[] = [];
@@ -61,7 +61,7 @@ export const addToBasket = (productId: string, amount = 1) => {
         totalSum
       }
     });
-  }
+  };
 };
 
 export const decreaseProductAmountInBasket = (productId: string) => {
@@ -94,7 +94,7 @@ export const decreaseProductAmountInBasket = (productId: string) => {
         }
       });
     }
-  }
+  };
 };
 
 export const removeProductFromBasket = (productId: string) => {
@@ -114,5 +114,11 @@ export const removeProductFromBasket = (productId: string) => {
         totalSum
       }
     });
-  }
+  };
+};
+
+export const resetBasket = () => {
+  return (dispatch: Dispatch<BasketActions>) => {
+    dispatch({ type: BasketActionsTypes.RESET_BASKET });
+  };
 };

@@ -3,15 +3,19 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import BasketItem from "../../components/BasketItem/BasketItem";
 import useModal from "../../components/ui/Modal/useModal";
 import Modal from "../../components/ui/Modal/Modal";
+import orderSuccessIcon from "../../assets/icons/order-success-icon.png";
 import './Basket.scss';
 
 const Basket: React.FC = () => {
   const {basket, totalSum} = useTypedSelector((state) => state.basket);
-  const { isOpen, toggle } = useModal();
+  const {isOpen, toggle} = useModal();
 
   return (
     <>
       <Modal isOpen={isOpen} toggle={toggle}>
+        <div className="modal__icon-div">
+          <img src={orderSuccessIcon} alt="Order Success Icon"/>
+        </div>
         <p className="modal__text-bold">Спасибо за заказ</p>
         <p className="modal__text">Наш менеджер свяжется с вами в ближайшее время</p>
       </Modal>
@@ -19,7 +23,7 @@ const Basket: React.FC = () => {
         <h1 className="basket__title">Корзина</h1>
         <div className="basket__inner">
           {
-            basket.length === 0 ? <p className="basket__message">Нет товаров</p> :
+            basket.length === 0 ? <p className="info-msg">Нет товаров</p> :
               <>
                 {basket.map((item, index) => (
                   <BasketItem

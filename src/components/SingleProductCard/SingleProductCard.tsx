@@ -111,7 +111,7 @@ const SingleProductCard: React.FC<Product> = (props) => {
             alt="Arrow icon"
           />
         </div>
-        <p className={`singleProductCard__description ${descriptionIsHidden ? 'hide' : 'true'}`}>
+        <p className={`singleProductCard__description ${descriptionIsHidden ? 'hide' : 'show'}`}>
           {props.description}
         </p>
         <div className="singleProductCard__subtitle" onClick={onToggleFullInfo}>
@@ -121,7 +121,7 @@ const SingleProductCard: React.FC<Product> = (props) => {
             alt="Arrow icon"
           />
         </div>
-        <div className={`singleProductCard__full-info ${fullInfoIsHidden ? 'hide' : 'true'}`}>
+        <div className={`singleProductCard__full-info ${fullInfoIsHidden ? 'hide' : 'show'}`}>
           <p className="singleProductCard__info-text">
             Назначение:
             <span className="singleProductCard__info-bold">{props.brand}</span>

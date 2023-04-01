@@ -29,6 +29,8 @@ export const basketReducer = (state = initialState, action: BasketActions): Bask
         totalSum: action.payload.totalSum,
         totalAmount: action.payload.totalAmount
       };
+    case BasketActionsTypes.RESET_BASKET:
+      return initialState;
     default:
       return state;
   }

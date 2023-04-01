@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import ReactPaginate from "react-paginate";
 import CatalogTop from "../../components/CatalogTop/CatalogTop";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import ErrorMsg from "../../components/ui/ErrorMsg/ErrorMsg";
+import arrowPrevIcon from "../../assets/icons/arrow-prev.png";
+import arrowNextIcon from "../../assets/icons/arrow-next.png";
 import './Catalog.scss';
 
 const Catalog: React.FC = () => {
   const {products, fetchLoading, fetchError} = useTypedSelector((state) => state.products);
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const itemsPerPage = 5;
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = products.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(products.length / itemsPerPage);
+
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * itemsPerPage) % products.length;
+    setItemOffset(newOffset);
+  };
 
   let productsCards = null;
 
@@ -21,7 +35,7 @@ const Catalog: React.FC = () => {
   }
 
   if (!fetchError && !fetchLoading && products.length > 0) {
-    productsCards = products.map(item => (
+    productsCards = currentItems.map(item => (
         <ProductCard
           key={item.barcode}
           id={item.id}
@@ -36,6 +50,8 @@ const Catalog: React.FC = () => {
         />
       )
     );
+  } else {
+    productsCards = <p className="info-msg">Нет товаров</p>;
   }
 
   return (
@@ -47,7 +63,22 @@ const Catalog: React.FC = () => {
           <section className="catalog__cards-div">
             {productsCards}
           </section>
-          <div className="catalog__pagination">Pagination will be here</div>
+          <div className="catalog__pagination">
+            <ReactPaginate
+              activeClassName="pagination__active"
+              breakLabel="..."
+              nextLabel={<img src={arrowNextIcon} alt="Next"/>}
+              previousLabel={<img src={arrowPrevIcon} alt="Previous"/>}
+              containerClassName="pagination"
+              pageCount={pageCount}
+              onPageChange={handlePageClick}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={2}
+              pageClassName="pagination__page"
+              nextClassName="pagination__next"
+              previousClassName="pagination__prev"
+            />
+          </div>
           <p className="catalog__bottom-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam interdum ut justo,
             vestibulum sagittis iaculis iaculis. Quis mattis vulputate feugiat massa vestibulum duis.

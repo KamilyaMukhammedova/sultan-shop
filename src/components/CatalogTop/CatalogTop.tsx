@@ -1,20 +1,31 @@
 import React from 'react';
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
-import { FILTER_LIST } from "../../constants";
+import { FILTER_TYPES_LIST } from "../../constants";
 import './CatalogTop.scss';
 
 const CatalogTop: React.FC = () => {
-  const {sortProducts} = useActions();
+  const {filterTypeName} = useTypedSelector((state) => state.products);
+  const {sortProducts, filterProductsByType, refreshProducts, refreshProducers} = useActions();
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     sortProducts(value);
   };
 
+  const onFilterByType = (type: string) => {
+   filterProductsByType(type);
+  };
+
+  const refreshCatalog = () => {
+     refreshProducts();
+     refreshProducers();
+  };
+
   return (
     <section className="catalog-top">
       <div className="catalog-top__box1">
-        <h1 className="catalog-top__title">Косметика и гигиена</h1>
+        <h1 className="catalog-top__title" onClick={refreshCatalog}>Косметика и гигиена</h1>
         <div className="catalog-top__sorting">
           <label htmlFor="sorting" className="catalog-top__label">Сортировка:</label>
           <select
@@ -33,12 +44,18 @@ const CatalogTop: React.FC = () => {
         </div>
       </div>
       <ul className="catalog-top__filter-list">
-        {FILTER_LIST.map((item, index) => {
-          if (index < 4) {
-            return <li key={index} className="catalog-top__filter-item catalog-top_filter1">{item}</li>
-          }
-          return <li key={index} className="catalog-top__filter-item catalog-top_filter2">{item}</li>
-        })}
+        {FILTER_TYPES_LIST.map((type, index) => (
+          <li
+            key={index}
+            className={`catalog-top__filter-item 
+            ${index < 4 ? 'catalog-top_filter1' : 'catalog-top_filter2'}
+            ${filterTypeName === type && 'active-type'}
+            `}
+            onClick={() => onFilterByType(type)}
+          >
+            {type}
+          </li>
+        ))}
       </ul>
     </section>
   );

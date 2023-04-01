@@ -44,8 +44,6 @@ export const fetchProductsFromApi = () => {
           type: ProductsActionsTypes.GET_ALL_PRODUCERS,
           payload: producersObject
         });
-
-        localStorage.setItem('catalogProducts', JSON.stringify(productsArray));
       } else {
         dispatch({
           type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,
@@ -116,12 +114,38 @@ export const sortProducts = (value: string) => {
 
 export const filterProducts = (priceFrom: number, priceTo: number, producers: string[]) => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const productsLocalStorage = store.getState().products.productsLocalStorage;
 
-    dispatch({
-      type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
-      payload: [...productsLocalStorage]
-    });
+    const filterTypeName = store.getState().products.filterTypeName;
+
+    if(filterTypeName !== '') {
+      const productsApi = store.getState().products.productsApi;
+
+      dispatch({
+        type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
+        payload: [...productsApi]
+      });
+
+      const productsArray = store.getState().products.products;
+      const productsArrayCopy = [...productsArray];
+
+      const filteredProducts = productsArrayCopy.filter(product => product.type.includes(filterTypeName));
+
+      dispatch({
+        type: ProductsActionsTypes.FILTER_PRODUCTS_BY_TYPE,
+        payload: filteredProducts
+      });
+
+      dispatch({
+        type: ProductsActionsTypes.SET_FILTER_TYPE_NAME,
+        payload: filterTypeName
+      });
+    } else {
+      const productsStore = store.getState().products.productsApi;
+      dispatch({
+        type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
+        payload: [...productsStore]
+      });
+    }
 
     const productsArray = store.getState().products.products;
     const productsArrayCopy = [...productsArray];
@@ -141,6 +165,44 @@ export const filterProducts = (priceFrom: number, priceTo: number, producers: st
     dispatch({
       type: ProductsActionsTypes.FILTER_PRODUCTS,
       payload: filteredProducts
+    });
+
+    dispatch({
+      type: ProductsActionsTypes.SET_FILTER_ON_OFF,
+      payload: true
+    });
+  }
+};
+
+export const filterProductsByType = (type: string) => {
+  return (dispatch: Dispatch<ProductsActions>) => {
+    const filterIsOn = store.getState().products.filterIsOn;
+
+    let productsArray: ProductMutation[] = [];
+
+    if(filterIsOn) {
+      productsArray = store.getState().products.products;
+    } else {
+      const productsApi = store.getState().products.productsApi;
+      dispatch({
+        type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
+        payload: [...productsApi]
+      });
+      productsArray = store.getState().products.products;
+    }
+
+    const productsArrayCopy = [...productsArray];
+
+    const filteredProducts = productsArrayCopy.filter(product => product.type.includes(type));
+
+    dispatch({
+      type: ProductsActionsTypes.FILTER_PRODUCTS_BY_TYPE,
+      payload: filteredProducts
+    });
+
+    dispatch({
+      type: ProductsActionsTypes.SET_FILTER_TYPE_NAME,
+      payload: type
     });
   }
 };
@@ -175,11 +237,21 @@ export const refreshProducers = () => {
 
 export const refreshProducts = () => {
   return (dispatch: Dispatch<ProductsActions>) => {
-    const productsLocalStorage = store.getState().products.productsLocalStorage;
+    const productsLocalStorage = store.getState().products.productsApi;
 
     dispatch({
       type: ProductsActionsTypes.REFRESH_PRODUCTS_ARRAY,
       payload: [...productsLocalStorage]
+    });
+
+    dispatch({
+      type: ProductsActionsTypes.SET_FILTER_ON_OFF,
+      payload: false
+    });
+
+    dispatch({
+      type: ProductsActionsTypes.SET_FILTER_TYPE_NAME,
+      payload: ''
     });
   }
 };

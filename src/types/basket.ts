@@ -17,9 +17,10 @@ export interface BasketState {
 }
 
 export enum BasketActionsTypes {
-   ADD_TO_BASKET = 'ADD_TO_BASKET',
-   REMOVE_PRODUCT_FROM_BASKET = 'REMOVE_PRODUCT_FROM_BASKET',
-   DECREASE_PRODUCT_AMOUNT_IN_BASKET = 'DECREASE_PRODUCT_AMOUNT_IN_BASKET',
+  ADD_TO_BASKET = 'ADD_TO_BASKET',
+  REMOVE_PRODUCT_FROM_BASKET = 'REMOVE_PRODUCT_FROM_BASKET',
+  DECREASE_PRODUCT_AMOUNT_IN_BASKET = 'DECREASE_PRODUCT_AMOUNT_IN_BASKET',
+  RESET_BASKET = 'RESET_BASKET'
 }
 
 export interface AddToBasket {
@@ -49,7 +50,11 @@ export interface DecreaseProductAmountInBasket {
   }
 }
 
-export type BasketActions = AddToBasket | DecreaseProductAmountInBasket | RemoveProductFromBasket;
+export interface ResetBasket {
+  type: BasketActionsTypes.RESET_BASKET
+}
+
+export type BasketActions = AddToBasket | DecreaseProductAmountInBasket | RemoveProductFromBasket | ResetBasket;
 
 
 

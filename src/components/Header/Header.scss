@@ -2,6 +2,10 @@
 @import "../../styles/mixins";
 
 .header {
+  position: sticky;
+  top: 0;
+  background-color: #cbcbcb;
+
   &__top {
     padding: 20px 0;
 

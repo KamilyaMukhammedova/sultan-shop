@@ -19,6 +19,10 @@
     line-height: 48px;
     color: $black;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     @include large {
       font-size: 35px;
       line-height: 40px;
@@ -112,7 +116,7 @@
 
     &:hover {
       cursor: pointer;
-      color: $yellow;
+      font-weight: 700;
     }
 
     @include extraLarge {

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
-import { FILTER_LIST } from "../../constants";
+import { FILTER_TYPES_LIST } from "../../constants";
 import Spinner from "../ui/Spinner/Spinner";
 import searchIcon from "../../assets/icons/search-icon.png";
 import arrowDownIcon from "../../assets/icons/arrow-down-icon.png";
+import arrowUpIcon from "../../assets/icons/arrow-up-icon.png";
 import trashIcon from "../../assets/icons/trash-icon.png";
 import './Sidebar.scss';
 
 const Sidebar: React.FC = () => {
-  const producers = useTypedSelector((state) => state.products.producers);
+  const {producers, filterTypeName} = useTypedSelector((state) => state.products);
   const fetchLoading = useTypedSelector((state) => state.products.fetchLoading);
-  const {filterProducts, filterProducers, refreshProducts, refreshProducers} = useActions();
+  const {filterProducts, filterProducers, refreshProducts, refreshProducers, filterProductsByType} = useActions();
 
   const [priceFilter, setPriceFilter] = useState({
     priceFrom: 0,
@@ -22,17 +23,7 @@ const Sidebar: React.FC = () => {
 
   const [producerSearch, setProducerSearch] = useState('');
 
-  // const getProducersFilterInitialState = () => {
-  //   const producersChecked: { [key: string]: boolean } = {};
-  //
-  //   producers && Object.keys(producers).forEach((item) => {
-  //     if (!producersChecked.hasOwnProperty(item)) {
-  //       producersChecked[item] = false;
-  //     }
-  //   });
-  //
-  //   setProducersFilter(producersChecked);
-  // };
+  const [producersFullListShowed, setProducersFullListShowed] = useState(false);
 
   useEffect(() => {
     const producersChecked: { [key: string]: boolean } = {};
@@ -84,7 +75,7 @@ const Sidebar: React.FC = () => {
   };
 
   const onProducerSearchBtn = () => {
-    if(producerSearch) {
+    if (producerSearch) {
       filterProducers(producerSearch);
     }
   };
@@ -99,16 +90,14 @@ const Sidebar: React.FC = () => {
     });
 
     setProducerSearch('');
+  };
 
-    const producersChecked: { [key: string]: boolean } = {};
+  const toggleProducers = () => {
+    setProducersFullListShowed(prevState => !prevState);
+  };
 
-    producers && Object.keys(producers).forEach((item) => {
-      if (!producersChecked.hasOwnProperty(item)) {
-        producersChecked[item] = false;
-      }
-    });
-
-    setProducersFilter(producersChecked);
+  const onFilterByType = (type: string) => {
+    filterProductsByType(type);
   };
 
   return (
@@ -153,7 +142,14 @@ const Sidebar: React.FC = () => {
         </form>
         {fetchLoading ? <Spinner/> :
           producers && Object.keys(producers).map((keyName, index) => (
-            <div className="sidebar__producer-checkbox-div" key={index}>
+            <div
+              className={
+                `sidebar__producer-checkbox-div 
+              ${!producersFullListShowed && index > 2 ? 'hide' : 'show'}
+              `
+              }
+              key={index}
+            >
               <input
                 type="checkbox"
                 name="producer"
@@ -166,9 +162,14 @@ const Sidebar: React.FC = () => {
               <span className="sidebar__producer-amount">({producers[keyName]})</span>
             </div>
           ))}
-        <div className="sidebar__show-all">
-          <span className="sidebar__show-all-text">Показать все</span>
-          <img src={arrowDownIcon} alt="Arrow down icon"/>
+        <div className="sidebar__show-all" onClick={toggleProducers}>
+          <span className="sidebar__show-all-text">
+            {!producersFullListShowed ? 'Показать все' : 'Скрыть'}
+          </span>
+          <img
+            src={!producersFullListShowed ? arrowDownIcon : arrowUpIcon}
+            alt="Arrow down icon"
+          />
         </div>
       </div>
       <div className="sidebar__show-results-div">
@@ -184,8 +185,14 @@ const Sidebar: React.FC = () => {
         </button>
       </div>
       <ul className="sidebar__filter-list">
-        {FILTER_LIST.map((item, index) => (
-          <li key={index} className="sidebar__filter-list-item">{item}</li>
+        {FILTER_TYPES_LIST.map((type, index) => (
+          <li
+            key={index}
+            className={`sidebar__filter-list-item ${filterTypeName === type && 'active-type'}`}
+            onClick={() => onFilterByType(type)}
+          >
+            {type}
+          </li>
         ))}
       </ul>
     </aside>

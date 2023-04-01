@@ -89,6 +89,25 @@ ul {
   display: none;
 }
 
+.active-type {
+  color: $yellow !important;
+  font-weight: 500 !important;
+
+  &:hover {
+    font-weight: 700 !important;
+  }
+}
+
+.info-msg {
+  margin: 20px 0;
+  background: linear-gradient(90deg, rgba(255, 198, 80, 0.3) 0%, rgba(254, 202, 110, 0.3) 97.25%);
+  padding: 30px;
+  text-align: center;
+  font-size: 30px;
+  border-radius: 15px;
+  width: 100%;
+}
+
 .amount {
   display: flex;
   justify-content: space-between;
@@ -107,5 +126,33 @@ ul {
     background: linear-gradient(90deg, rgba(255, 198, 80, 0.3) 0%, rgba(254, 202, 110, 0.3) 97.25%);
     border-color: transparent;
     border-radius: 15px;
+  }
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+  width: 30%;
+  margin: 0 auto;
+
+  &__page {
+    padding: 5px 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__prev,
+  &__next {
+    padding: 10px 15px;
+  }
+
+  &__active {
+    background: linear-gradient(90deg, rgba(255, 198, 80, 0.3) 0%, rgba(254, 202, 110, 0.3) 97.25%);
+    border-radius: 50%;
   }
 }
