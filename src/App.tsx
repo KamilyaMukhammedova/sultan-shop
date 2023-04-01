@@ -17,7 +17,6 @@ const App: React.FC = () => {
     <Layout>
       <Routes>
         <Route path={'/'} element={(<Catalog/>)}/>
-        <Route path={'/catalog'} element={(<Catalog/>)}/>
         <Route path={'/product/:id'} element={(<OneProduct/>)}/>
         <Route path={'/basket'} element={(<Basket/>)}/>
         <Route path={'*'} element={(<h1>Page not found</h1>)}/>

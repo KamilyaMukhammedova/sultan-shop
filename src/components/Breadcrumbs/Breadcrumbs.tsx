@@ -1,12 +1,29 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Breadcrumbs.scss';
 
-const Breadcrumbs: React.FC = () => {
+interface Info {
+  path: string,
+  name: string
+}
+
+interface IProps {
+   infoArr: Info[]
+}
+
+const Breadcrumbs: React.FC<IProps> = (props) => {
   return (
     <div className="breadcrumbs">
-      <NavLink to={'/'}>Главная</NavLink>
-      <NavLink to={'/'}>Каталог</NavLink>
+      <Link to={'/'} className="breadcrumbs__link">Главная</Link>
+      {props.infoArr.map((item, index) => (
+        <Link
+          key={index}
+          to={`/${item.path}`}
+          className={`breadcrumbs__link ${index === props.infoArr.length - 1 && 'breadcrumbs__active'}`}
+        >
+          {item.name}
+        </Link>
+      ))}
     </div>
   );
 };

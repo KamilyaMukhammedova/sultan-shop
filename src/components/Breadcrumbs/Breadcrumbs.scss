@@ -1,4 +1,16 @@
+@import "../../styles/variables";
+
 .breadcrumbs {
   font-weight: 300;
   line-height: 16.8px;
+
+  &__link {
+    text-decoration: none;
+    margin-right: 18px;
+    color: $grey3F;
+  }
+
+  &__active {
+    opacity: 0.5;
+  }
 }

@@ -5,10 +5,12 @@ import useModal from "../../components/ui/Modal/useModal";
 import Modal from "../../components/ui/Modal/Modal";
 import orderSuccessIcon from "../../assets/icons/order-success-icon.png";
 import './Basket.scss';
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Basket: React.FC = () => {
   const {basket, totalSum} = useTypedSelector((state) => state.basket);
   const {isOpen, toggle} = useModal();
+  const breadCrumbs = [{path: 'basket', name: 'Корзина'}];
 
   return (
     <>
@@ -20,6 +22,7 @@ const Basket: React.FC = () => {
         <p className="modal__text">Наш менеджер свяжется с вами в ближайшее время</p>
       </Modal>
       <div className="basket">
+        <Breadcrumbs infoArr={breadCrumbs}/>
         <h1 className="basket__title">Корзина</h1>
         <div className="basket__inner">
           {

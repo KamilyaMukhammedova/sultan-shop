@@ -5,6 +5,8 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import ErrorMsg from "../../components/ui/ErrorMsg/ErrorMsg";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import './OneProduct.scss';
 
 const OneProduct: React.FC = () => {
   const {id} = useParams();
@@ -19,6 +21,7 @@ const OneProduct: React.FC = () => {
     id && fetchOneProductFromApi(id);
   }, [id]);
 
+  let breadCrumbs = null;
   let productInfo = null;
 
   if (oneProductFetchLoading) {
@@ -29,7 +32,21 @@ const OneProduct: React.FC = () => {
     productInfo = <ErrorMsg message={oneProductFetchError}/>;
   }
 
-  if(!oneProductFetchError && !oneProductFetchLoading && oneProduct && id) {
+  if (oneProduct && id) {
+    breadCrumbs = <Breadcrumbs
+      infoArr={
+        [
+          {path: '', name: 'Каталог'},
+          {
+            path: `product/${id}`,
+            name: `${oneProduct.brand.toUpperCase()}  ${oneProduct.name}`
+          }
+        ]
+      }
+    />;
+  }
+
+  if (!oneProductFetchError && !oneProductFetchLoading && oneProduct && id) {
     productInfo = (
       <SingleProductCard
         image={oneProduct.image}
@@ -47,9 +64,10 @@ const OneProduct: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="one-product">
+      {breadCrumbs}
       {productInfo}
-    </>
+    </div>
   );
 };
 
