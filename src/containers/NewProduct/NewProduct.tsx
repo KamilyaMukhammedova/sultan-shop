@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { FILTER_TYPES_LIST } from "../../constants";
@@ -15,9 +15,15 @@ const filterTypesArray = FILTER_TYPES_LIST.map(type => {
 });
 
 const NewProduct: React.FC = () => {
-  const {createProductError, createProductLoading} = useTypedSelector((state) => state.products);
-  const {createNewProduct} = useActions();
+  const {oneProduct, createProductError, createProductLoading, editProductLoading, editProductError} =
+    useTypedSelector((state) => state.products)
+  ;
+
+  const {createNewProduct, fetchOneProductFromApi, editProduct} = useActions();
   const navigate = useNavigate();
+  const {id} = useParams() as {id: string};
+
+  const [editMode, setEditMode] = useState(false);
 
   const [form, setForm] = useState({
     name: '',
@@ -46,7 +52,7 @@ const NewProduct: React.FC = () => {
       types.filter(type => Object.values(type)[0]).map(item => Object.keys(item)[0])
     ;
 
-    const newProductData: Product = {
+    const productData: Product = {
       image: form.image,
       name: form.name,
       brand: form.brand,
@@ -59,7 +65,11 @@ const NewProduct: React.FC = () => {
       type: checkedTypes
     };
 
-    await createNewProduct(newProductData);
+    if(!editMode) {
+      await createNewProduct(productData);
+    } else {
+      await editProduct(productData, id);
+    }
 
     if(!createProductError) {
       navigate('/');
@@ -101,9 +111,46 @@ const NewProduct: React.FC = () => {
     );
   };
 
+  const fetchOneProductData = useCallback(async () => {
+    if(id) {
+      await fetchOneProductFromApi(id);
+
+      if(oneProduct) {
+        const typesArrCopy = types.map(type => {
+          if(oneProduct.type.includes(Object.keys(type)[0])) {
+            return {
+              [Object.keys(type)[0]]: true
+            };
+          }
+          return type;
+        });
+
+        setForm({
+          name: oneProduct.name,
+          brand: oneProduct.brand,
+          producer: oneProduct.producer,
+          barcode: oneProduct.barcode.toString(),
+          sizeType: oneProduct.sizeType,
+          size: oneProduct.size,
+          image: oneProduct.image,
+          price: oneProduct.price,
+          description: oneProduct.description
+        });
+
+        setTypes(typesArrCopy);
+        setEditMode(true);
+      }
+    }
+  }, [id]);
+
+
+  useEffect(() => {
+    void fetchOneProductData();
+  }, [id, fetchOneProductData]);
+
   return (
     <div className="new-product">
-      <h1 className="new-product__title">Новый товар</h1>
+      <h1 className="new-product__title">{!editMode ? 'Новый товар' : 'Редактировать товар'}</h1>
       <form className="new-product__form" onSubmit={onSubmit}>
         <div className="new-product__form-group">
           <label htmlFor="name">Название*</label>
@@ -257,14 +304,16 @@ const NewProduct: React.FC = () => {
             onChange={onInputChange}
           />
         </div>
-        {createProductLoading ?
+        {
+          createProductLoading || editProductLoading ?
           <Spinner/> :
           <button type="submit" className="new-product__form-btn-sbm" disabled={onDisabled()}>
-            Добавить
+            {!editMode ? 'Добавить' : 'Редактировать'}
           </button>
         }
       </form>
       {createProductError && <ErrorMsg message={createProductError}/>}
+      {editProductError && <ErrorMsg message={editProductError}/>}
     </div>
   );
 };

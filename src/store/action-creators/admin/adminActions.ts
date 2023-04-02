@@ -31,3 +31,22 @@ export const createNewProduct = (productData: Product) => {
     }
   }
 };
+
+export const editProduct = (productData: Product, id: string) => {
+  return async (dispatch: Dispatch<AdminActions>) => {
+    try {
+      dispatch({type: AdminActionsTypes.EDIT_PRODUCT});
+
+      const response = await axiosApi.put<ApiProducts | null>(`/catalog/${id}.json`, productData);
+
+      if(response.status === 200) {
+        dispatch({type: AdminActionsTypes.EDIT_PRODUCT_SUCCESS});
+      }
+    } catch (e) {
+      dispatch({
+        type: AdminActionsTypes.EDIT_PRODUCT_FAILURE,
+        payload: 'Произошла ошибка при редактировании продукта!'
+      });
+    }
+  }
+};

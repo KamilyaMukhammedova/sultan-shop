@@ -44,6 +44,16 @@ export const fetchProductsFromApi = () => {
           type: ProductsActionsTypes.GET_ALL_PRODUCERS,
           payload: producersObject
         });
+
+        dispatch({
+          type: ProductsActionsTypes.SET_FILTER_ON_OFF,
+          payload: false
+        });
+
+        dispatch({
+          type: ProductsActionsTypes.SET_FILTER_TYPE_NAME,
+          payload: ''
+        });
       } else {
         dispatch({
           type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,

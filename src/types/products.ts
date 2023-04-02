@@ -37,6 +37,8 @@ export interface ProductsState {
   fetchError: null | string,
   createProductLoading: boolean,
   createProductError: null | string,
+  editProductLoading: boolean,
+  editProductError: null | string,
 }
 
 export enum ProductsActionsTypes {

@@ -12,6 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path={'/'} element={(<Catalog/>)}/>
         <Route path={'/product/:id'} element={(<OneProduct/>)}/>
+        <Route path={'/edit/:id'} element={(<NewProduct/>)}/>
         <Route path={'/basket'} element={(<Basket/>)}/>
         <Route path={'/new-product'} element={(<NewProduct/>)}/>
         <Route path={'*'} element={(<h1>Page not found</h1>)}/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useActions } from "../../hooks/useActions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProductMutation } from "../../types/products";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import Size from "../Size/Size";
@@ -14,9 +14,14 @@ type IProps = Omit<ProductMutation, 'description' | 'type'>;
 const ProductCard: React.FC<IProps> = (props) => {
   const {isAdminMode} = useTypedSelector((state) => state.mode);
   const {addToBasket} = useActions();
+  const navigate = useNavigate();
 
   const onAddBtn = () => {
     addToBasket(props.id);
+  };
+
+  const editProduct = () => {
+    navigate(`/edit/${props.id}`);
   };
 
   return (
@@ -56,7 +61,7 @@ const ProductCard: React.FC<IProps> = (props) => {
       </div>
       {isAdminMode &&
           <div className="productCard__admin-options">
-              <button type="button" className="productCard__btn productCard_btn-blue">
+              <button type="button" className="productCard__btn productCard_btn-blue" onClick={editProduct}>
                   <img src={editIcon} alt="Edit icon"/>
               </button>
               <button type="button" className="productCard__btn productCard_btn-red">

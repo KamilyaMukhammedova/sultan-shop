@@ -10,8 +10,7 @@ import trashIcon from "../../assets/icons/trash-icon.png";
 import './Sidebar.scss';
 
 const Sidebar: React.FC = () => {
-  const {producers, filterTypeName} = useTypedSelector((state) => state.products);
-  const fetchLoading = useTypedSelector((state) => state.products.fetchLoading);
+  const {producers, filterTypeName, fetchLoading} = useTypedSelector((state) => state.products);
   const {filterProducts, filterProducers, refreshProducts, refreshProducers, filterProductsByType} = useActions();
 
   const [priceFilter, setPriceFilter] = useState({

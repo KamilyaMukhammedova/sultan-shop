@@ -6,7 +6,7 @@ import './CatalogTop.scss';
 
 const CatalogTop: React.FC = () => {
   const {filterTypeName} = useTypedSelector((state) => state.products);
-  const {sortProducts, filterProductsByType, refreshProducts, refreshProducers} = useActions();
+  const {sortProducts, filterProductsByType, fetchProductsFromApi} = useActions();
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
@@ -18,8 +18,7 @@ const CatalogTop: React.FC = () => {
   };
 
   const refreshCatalog = () => {
-     refreshProducts();
-     refreshProducers();
+    fetchProductsFromApi();
   };
 
   return (
