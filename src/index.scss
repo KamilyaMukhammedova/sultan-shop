@@ -16,8 +16,14 @@ body {
   line-height: 21px;
 }
 
+button {
+  transition: transform .3s ease-out;
+  display: inline-block;
+}
+
 button:hover {
   cursor: pointer;
+  transform: translate(0, -5px);
 }
 
 ul {

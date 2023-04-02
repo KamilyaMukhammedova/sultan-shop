@@ -17,6 +17,8 @@ const initialState: ProductsState = {
   createProductError: null,
   editProductLoading: false,
   editProductError: null,
+  removeProductLoading: '',
+  removeProductError: null,
 };
 
 export const productsReducer = (
@@ -54,20 +56,24 @@ export const productsReducer = (
       return {...state, producers: action.payload};
     case ProductsActionsTypes.REFRESH_PRODUCERS:
       return {...state, producers: action.payload};
-
     case AdminActionsTypes.CREATE_NEW_PRODUCT:
       return {...state, createProductLoading: true, createProductError: null};
     case AdminActionsTypes.CREATE_NEW_PRODUCT_SUCCESS:
       return {...state, createProductLoading: false};
     case AdminActionsTypes.CREATE_NEW_PRODUCT_FAILURE:
       return {...state, createProductLoading: false, createProductError: action.payload};
-
     case AdminActionsTypes.EDIT_PRODUCT:
       return {...state, editProductLoading: true, editProductError: null};
     case AdminActionsTypes.EDIT_PRODUCT_SUCCESS:
       return {...state, editProductLoading: false};
     case AdminActionsTypes.EDIT_PRODUCT_FAILURE:
       return {...state, editProductLoading: false, editProductError: action.payload};
+    case AdminActionsTypes.REMOVE_PRODUCT:
+      return {...state, removeProductLoading: action.payload, removeProductError: null};
+    case AdminActionsTypes.REMOVE_PRODUCT_SUCCESS:
+      return {...state, removeProductLoading: action.payload};
+    case AdminActionsTypes.REMOVE_PRODUCT_FAILURE:
+      return {...state, removeProductLoading: action.payload[0], removeProductError: action.payload[1]};
     default:
       return state;
   }

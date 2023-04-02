@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import ReactPaginate from "react-paginate";
 import CatalogTop from "../../components/CatalogTop/CatalogTop";
@@ -10,7 +11,6 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import arrowPrevIcon from "../../assets/icons/arrow-prev.png";
 import arrowNextIcon from "../../assets/icons/arrow-next.png";
 import './Catalog.scss';
-import { useActions } from "../../hooks/useActions";
 
 const Catalog: React.FC = () => {
   const {products, fetchLoading, fetchError} = useTypedSelector((state) => state.products);
