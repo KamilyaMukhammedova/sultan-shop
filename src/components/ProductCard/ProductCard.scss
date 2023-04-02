@@ -4,7 +4,7 @@
 .productCard {
   background-color: $white;
   border-radius: 10px;
-  box-shadow: 0 14px 39px -11px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
   padding: 20px 15px;
   width: 32%;
   margin-bottom: 20px;
@@ -62,11 +62,20 @@
     margin-bottom: 10px;
   }
 
-  &__inner2 {
+  &__inner2,
+  &__admin-options {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+  }
+
+  &__admin-options {
+    margin-top: 15px;
+    justify-content: center;
+  }
+
+  &__inner2 {
     margin-top: auto;
+    justify-content: space-between;
   }
 
   &__price {
@@ -103,5 +112,21 @@
       text-decoration: underline;
       color: inherit;
     }
+  }
+
+  &__btn {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-color: transparent;
+    margin-right: 5px;
+  }
+
+  &_btn-blue {
+    background: linear-gradient(180deg, #6CD0E9 14.1%, #6CADE9 57.69%);
+  }
+
+  &_btn-red {
+    background-color: #f9d7da;
   }
 }

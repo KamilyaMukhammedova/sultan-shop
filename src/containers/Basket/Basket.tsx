@@ -3,9 +3,9 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import BasketItem from "../../components/BasketItem/BasketItem";
 import useModal from "../../components/ui/Modal/useModal";
 import Modal from "../../components/ui/Modal/Modal";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import orderSuccessIcon from "../../assets/icons/order-success-icon.png";
 import './Basket.scss';
-import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Basket: React.FC = () => {
   const {basket, totalSum} = useTypedSelector((state) => state.basket);

@@ -1,5 +1,8 @@
-import React from 'react';
-import { Link, NavLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
+import MiniBasket from "../MiniBasket/MiniBasket";
 import locationIcon from '../../assets/icons/location-icon.png';
 import mailIcon from '../../assets/icons/mail-icon.png';
 import catalogIcon from '../../assets/icons/catalog-icon.png';
@@ -10,13 +13,37 @@ import priceListIcon from '../../assets/icons/price-list-icon.png';
 import menuIcon from '../../assets/icons/menu-icon.png';
 import logo from '../../assets/logo-grey.png';
 import callCenter from '../../assets/call-center.png';
-import MiniBasket from "../MiniBasket/MiniBasket";
 import './Header.scss';
 
 const Header: React.FC = () => {
+  const {isAdminMode} = useTypedSelector((state) => state.mode);
+  const {manageMode} = useActions();
+  const navigate = useNavigate();
+
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuIsOpen(prevState => !prevState);
+  };
+
+  const setMode = () => {
+    manageMode(!isAdminMode);
+    if(isAdminMode) {
+      navigate('/');
+    }
+  };
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      setMenuIsOpen(true);
+    } else {
+      setMenuIsOpen(false);
+    }
+  });
+
   return (
     <header className="header">
-      <section className="header__top">
+      <section className={`header__top ${menuIsOpen  || window.innerWidth > 768 ? 'show' : 'hide'}`}>
         <div className="container">
           <div className="header__top-inner">
             <div className="header__top-box">
@@ -49,6 +76,14 @@ const Header: React.FC = () => {
                 <li className="header__nav-item">
                   <NavLink to={'/'} className="header__link">Контакты</NavLink>
                 </li>
+                <li className="header__nav-item" onClick={setMode}>
+                  <span>{isAdminMode ? 'Админ' : 'Пользователь'}</span>
+                </li>
+                {isAdminMode &&
+                    <li className="header__nav-item">
+                        <NavLink to={'/new-product'} className="header__link">Добавить товар</NavLink>
+                    </li>
+                }
               </ul>
             </nav>
           </div>
@@ -59,7 +94,7 @@ const Header: React.FC = () => {
         <div className="container">
           <div className="header__bottom-inner">
             <div className="header__bottom-box1">
-              <button type="button" className="header__menu-btn">
+              <button type="button" className="header__menu-btn" onClick={toggleMenu}>
                 <img src={menuIcon} alt="Menu icon"/>
               </button>
               <NavLink to={'/'} className="header__link">

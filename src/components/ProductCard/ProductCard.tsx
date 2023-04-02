@@ -2,13 +2,17 @@ import React from 'react';
 import { useActions } from "../../hooks/useActions";
 import { Link } from "react-router-dom";
 import { ProductMutation } from "../../types/products";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import Size from "../Size/Size";
 import basketIcon from '../../assets/icons/basket-white-icon.png';
+import editIcon from '../../assets/icons/edit-icon.png';
+import trashIcon from '../../assets/icons/trash-icon.png';
 import './ProductCard.scss';
 
-type IProps = Omit<ProductMutation, 'description'|'type'>;
+type IProps = Omit<ProductMutation, 'description' | 'type'>;
 
 const ProductCard: React.FC<IProps> = (props) => {
+  const {isAdminMode} = useTypedSelector((state) => state.mode);
   const {addToBasket} = useActions();
 
   const onAddBtn = () => {
@@ -50,6 +54,16 @@ const ProductCard: React.FC<IProps> = (props) => {
           <img src={basketIcon} alt="MiniBasket icon"/>
         </button>
       </div>
+      {isAdminMode &&
+          <div className="productCard__admin-options">
+              <button type="button" className="productCard__btn productCard_btn-blue">
+                  <img src={editIcon} alt="Edit icon"/>
+              </button>
+              <button type="button" className="productCard__btn productCard_btn-red">
+                  <img src={trashIcon} alt="Trash icon"/>
+              </button>
+          </div>
+      }
     </div>
   );
 };

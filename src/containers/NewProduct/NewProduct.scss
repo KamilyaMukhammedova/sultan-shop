@@ -1,0 +1,109 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.new-product {
+  padding: 2rem 0 5rem;
+
+  &__title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    color: $black;
+    text-transform: uppercase;
+  }
+
+  &__form {
+    width: 60%;
+    margin: 40px 0;
+  }
+
+  &__form-group {
+    margin-bottom: 20px;
+
+    & label {
+      font-weight: 500;
+      color: $black;
+      font-size: 16px;
+      line-height: 24px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    & div {
+      background-color: $white;
+      height: 59px;
+      border-radius: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+    }
+
+    & input[type=text],
+    & input[type=number],
+    & input[type=url] {
+      border-color: transparent !important;
+      background-color: transparent !important;
+      outline: none !important;
+      width: 100%;
+
+      &::placeholder {
+        color: $grey5C;
+        font-size: 12px;
+        opacity: 0.6;
+      }
+    }
+
+    & select {
+      border-color: transparent;
+      background-color: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 12px;
+    }
+
+    & textarea {
+      border-color: transparent;
+      outline: none;
+      width: 100%;
+      border-radius: 15px;
+      resize: none;
+      padding: 15px;
+      box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+
+      &::placeholder {
+        color: $grey5C;
+        font: 400 12px 'Inter', sans-serif;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &__form-btn-sbm {
+    background-color: $yellow;
+    color: $white;
+    border-color: transparent;
+    width: 100%;
+    font-weight: 700;
+    padding: 17px 0;
+    border-radius: 39px;
+    margin-top: 15px;
+
+    &:disabled {
+      background-color: $grey3F;
+      opacity: 0.2;
+    }
+  }
+
+  & img {
+    margin-left: 5px;
+  }
+
+  &__checkbox {
+    margin-right: 10px;
+  }
+
+  &__type-label:hover {
+    cursor: pointer;
+  }
+}

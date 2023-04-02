@@ -1,20 +1,26 @@
 import { ProductsActions, ProductsActionsTypes, ProductsState } from "../../types/products";
+import { AdminActions, AdminActionsTypes } from "../../types/admin";
 
 const initialState: ProductsState = {
-  products: [],
   productsApi: [],
+  products: [],
   producers: null,
   producersFullList: null,
   oneProduct: null,
+  filterTypeName: '',
+  filterIsOn: false,
   oneProductFetchLoading: false,
   oneProductFetchError: null,
   fetchLoading: false,
   fetchError: null,
-  filterTypeName: '',
-  filterIsOn: false
+  createProductLoading: false,
+  createProductError: null
 };
 
-export const productsReducer = (state = initialState, action: ProductsActions): ProductsState => {
+export const productsReducer = (
+  state = initialState,
+  action: ProductsActions | AdminActions
+): ProductsState => {
   switch (action.type) {
     case ProductsActionsTypes.FETCH_PRODUCTS:
       return {...state, fetchLoading: true, fetchError: null};
@@ -46,6 +52,12 @@ export const productsReducer = (state = initialState, action: ProductsActions): 
       return {...state, producers: action.payload};
     case ProductsActionsTypes.REFRESH_PRODUCERS:
       return {...state, producers: action.payload};
+    case AdminActionsTypes.CREATE_NEW_PRODUCT:
+      return {...state, createProductLoading: true, createProductError: null};
+    case AdminActionsTypes.CREATE_NEW_PRODUCT_SUCCESS:
+      return {...state, createProductLoading: false, createProductError: null};
+    case AdminActionsTypes.CREATE_NEW_PRODUCT_FAILURE:
+      return {...state, createProductLoading: false, createProductError: action.payload};
     default:
       return state;
   }

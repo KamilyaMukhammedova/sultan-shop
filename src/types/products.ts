@@ -29,12 +29,14 @@ export interface ProductsState {
   producers: Producers | null,
   producersFullList: Producers | null,
   oneProduct: Product | null,
+  filterTypeName: string,
+  filterIsOn: boolean,
   oneProductFetchLoading: boolean,
   oneProductFetchError: null | string,
   fetchLoading: boolean,
   fetchError: null | string,
-  filterTypeName: string,
-  filterIsOn: boolean
+  createProductLoading: boolean,
+  createProductError: null | string,
 }
 
 export enum ProductsActionsTypes {

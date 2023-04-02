@@ -4,13 +4,16 @@
 .header {
   position: sticky;
   top: 0;
-  background-color: #cbcbcb;
+  z-index: 99;
+  background-color: #EDEDED;
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
 
   &__top {
     padding: 20px 0;
 
     @include medium {
       display: none;
+      padding-bottom: 0;
     }
   }
 
@@ -18,6 +21,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include medium {
+      display: block;
+    }
   }
 
   &__top-box {
@@ -27,17 +34,31 @@
     @include large {
       display: none;
     }
+
+    @include medium {
+      display: block;
+    }
   }
 
   &__top-box-border {
     border-right: 1px dashed rgba(63, 78, 101, 0.1);
     margin-right: 15px;
     padding-right: 15px;
+
+    @include medium {
+      border-right: none;
+      margin-right: 0;
+      padding-right: 0;
+    }
   }
 
   &__top-box-inner {
     display: flex;
     align-items: center;
+
+    @include medium {
+      margin-bottom: 15px;
+    }
   }
 
   &__info {
@@ -59,6 +80,10 @@
   &__nav {
     @include large {
       width: 100%;
+    }
+
+    @include medium {
+      margin-top: 20px;
     }
   }
 
@@ -97,6 +122,14 @@
     @include large {
       margin-left: 30px;
       padding-left: 30px;
+    }
+
+    @include medium {
+      display: block;
+      border-left: none;
+      margin-left: 0;
+      padding-left: 0;
+      margin-bottom: 15px;
     }
   }
 
@@ -197,7 +230,7 @@
   }
 
   &__bottom-search-div {
-    background-color: $greyED;
+    background-color: $white;
     height: 59px;
     display: flex;
     align-items: center;

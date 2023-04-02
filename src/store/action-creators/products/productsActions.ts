@@ -49,7 +49,6 @@ export const fetchProductsFromApi = () => {
           type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,
           payload: []
         });
-        localStorage.setItem('catalogProducts', JSON.stringify([]));
       }
     } catch (e) {
       dispatch({
@@ -114,7 +113,6 @@ export const sortProducts = (value: string) => {
 
 export const filterProducts = (priceFrom: number, priceTo: number, producers: string[]) => {
   return (dispatch: Dispatch<ProductsActions>) => {
-
     const filterTypeName = store.getState().products.filterTypeName;
 
     if(filterTypeName !== '') {
