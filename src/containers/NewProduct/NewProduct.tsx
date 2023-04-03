@@ -26,6 +26,8 @@ const NewProduct: React.FC = () => {
       useTypedSelector((state) => state.products)
   ;
 
+  const {isAdminMode} = useTypedSelector((state) => state.mode);
+
   const {createNewProductApi, fetchOneProductFromApi, editProductApi} = useActions();
   const navigate = useNavigate();
   const {id} = useParams() as { id: string };
@@ -115,6 +117,12 @@ const NewProduct: React.FC = () => {
       form.image && form.sizeType && form.size && form.description && form.price
     );
   };
+
+  useEffect(() => {
+    if (!isAdminMode) {
+      navigate('/');
+    }
+  }, [isAdminMode]);
 
   useEffect(() => {
     const fetchProduct = async () => {

@@ -54,10 +54,10 @@ export const fetchProductsFromApi = () => {
           type: ProductsActionsTypes.SET_FILTER_TYPE_NAME,
           payload: ''
         });
-      } else {
+
         dispatch({
-          type: ProductsActionsTypes.FETCH_PRODUCTS_SUCCESS,
-          payload: []
+          type: ProductsActionsTypes.FETCH_ONE_PRODUCT_SUCCESS,
+          payload: null
         });
       }
     } catch (e) {
@@ -75,7 +75,7 @@ export const fetchOneProductFromApi = (productId: string) => {
       dispatch({type: ProductsActionsTypes.FETCH_ONE_PRODUCT});
       const response = await axiosApi.get<Product | null>(`/catalog/${productId}.json`);
 
-      if(response.data) {
+      if (response.data) {
         dispatch({
           type: ProductsActionsTypes.FETCH_ONE_PRODUCT_SUCCESS,
           payload: response.data
@@ -125,7 +125,7 @@ export const filterProducts = (priceFrom: number, priceTo: number, producers: st
   return (dispatch: Dispatch<ProductsActions>) => {
     const filterTypeName = store.getState().products.filterTypeName;
 
-    if(filterTypeName !== '') {
+    if (filterTypeName !== '') {
       const productsApi = store.getState().products.productsApi;
 
       dispatch({
@@ -188,7 +188,7 @@ export const filterProductsByType = (type: string) => {
 
     let productsArray: ProductMutation[] = [];
 
-    if(filterIsOn) {
+    if (filterIsOn) {
       productsArray = store.getState().products.products;
     } else {
       const productsApi = store.getState().products.productsApi;
@@ -219,16 +219,16 @@ export const filterProducers = (value: string) => {
   return (dispatch: Dispatch<ProductsActions>) => {
     const producers = store.getState().products.producers;
 
-     if(producers) {
-       const producerObj = Object.fromEntries(Object.entries(producers)
-         .filter(([key]) => key.includes(value)))
-       ;
+    if (producers) {
+      const producerObj = Object.fromEntries(Object.entries(producers)
+        .filter(([key]) => key.includes(value)))
+      ;
 
-       dispatch({
-         type: ProductsActionsTypes.FILTER_PRODUCERS,
-         payload: producerObj
-       });
-     }
+      dispatch({
+        type: ProductsActionsTypes.FILTER_PRODUCERS,
+        payload: producerObj
+      });
+    }
   }
 };
 

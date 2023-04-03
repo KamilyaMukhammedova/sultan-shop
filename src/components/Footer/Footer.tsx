@@ -9,7 +9,6 @@ import visa from "../../assets/visa.png";
 import mastercard from "../../assets/mastercard.png";
 import './Footer.scss';
 
-
 const Footer: React.FC = () => {
   return (
     <footer className="footer">

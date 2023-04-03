@@ -119,6 +119,6 @@ export const removeProductFromBasket = (productId: string) => {
 
 export const resetBasket = () => {
   return (dispatch: Dispatch<BasketActions>) => {
-    dispatch({ type: BasketActionsTypes.RESET_BASKET });
+    dispatch({type: BasketActionsTypes.RESET_BASKET});
   };
 };

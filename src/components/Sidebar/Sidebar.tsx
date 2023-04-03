@@ -161,15 +161,19 @@ const Sidebar: React.FC = () => {
               <span className="sidebar__producer-amount">({producers[keyName]})</span>
             </div>
           ))}
-        <div className="sidebar__show-all" onClick={toggleProducers}>
+        {
+          JSON.stringify(producers) !== '{}' ?
+            <div className="sidebar__show-all" onClick={toggleProducers}>
           <span className="sidebar__show-all-text">
             {!producersFullListShowed ? 'Показать все' : 'Скрыть'}
           </span>
-          <img
-            src={!producersFullListShowed ? arrowDownIcon : arrowUpIcon}
-            alt="Arrow down icon"
-          />
-        </div>
+              <img
+                src={!producersFullListShowed ? arrowDownIcon : arrowUpIcon}
+                alt="Arrow down icon"
+              />
+            </div> :
+            <p>Нет результатов</p>
+        }
       </div>
       <div className="sidebar__show-results-div">
         <button

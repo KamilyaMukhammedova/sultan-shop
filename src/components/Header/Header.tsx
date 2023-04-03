@@ -28,7 +28,7 @@ const Header: React.FC = () => {
 
   const setMode = () => {
     manageMode(!isAdminMode);
-    if(isAdminMode) {
+    if (isAdminMode) {
       navigate('/');
     }
   };
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <section className={`header__top ${menuIsOpen  || window.innerWidth > 768 ? 'show' : 'hide'}`}>
+      <section className={`header__top ${menuIsOpen || window.innerWidth > 768 ? 'show' : 'hide'}`}>
         <div className="container">
           <div className="header__top-inner">
             <div className="header__top-box">
@@ -76,11 +76,11 @@ const Header: React.FC = () => {
                 <li className="header__nav-item">
                   <NavLink to={'/'} className="header__link">Контакты</NavLink>
                 </li>
-                <li className="header__nav-item" onClick={setMode}>
+                <li className="header__nav-item header__nav-user" onClick={setMode}>
                   <span>{isAdminMode ? 'Админ' : 'Пользователь'}</span>
                 </li>
                 {isAdminMode &&
-                    <li className="header__nav-item">
+                    <li className="header__nav-item header__nav-user">
                         <NavLink to={'/new-product'} className="header__link">Добавить товар</NavLink>
                     </li>
                 }

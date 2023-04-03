@@ -4,17 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { ProductMutation } from "../../types/products";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import Size from "../Size/Size";
+import Spinner from "../ui/Spinner/Spinner";
 import basketIcon from '../../assets/icons/basket-white-icon.png';
 import editIcon from '../../assets/icons/edit-icon.png';
 import trashIcon from '../../assets/icons/trash-icon.png';
 import './ProductCard.scss';
-import Spinner from "../ui/Spinner/Spinner";
 
 type IProps = Omit<ProductMutation, 'description' | 'type'>;
 
 const ProductCard: React.FC<IProps> = (props) => {
   const {isAdminMode} = useTypedSelector((state) => state.mode);
-  const {removeProductLoading, removeProductError} = useTypedSelector((state) => state.products);
+  const {removeProductLoading} = useTypedSelector((state) => state.products);
   const {addToBasket, removeProductApi, fetchProductsFromApi} = useActions();
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const ProductCard: React.FC<IProps> = (props) => {
     navigate(`/edit/${props.id}`);
   };
 
-  const removeProduct =  async () => {
+  const removeProduct = async () => {
     await removeProductApi(props.id);
     fetchProductsFromApi();
   };
@@ -66,15 +66,21 @@ const ProductCard: React.FC<IProps> = (props) => {
           <img src={basketIcon} alt="MiniBasket icon"/>
         </button>
       </div>
-      {isAdminMode && (removeProductLoading && removeProductLoading === props.id) ? <Spinner/> :
-        <div className="productCard__admin-options">
-          <button type="button" className="productCard__btn productCard_btn-blue" onClick={editProduct}>
-            <img src={editIcon} alt="Edit icon"/>
-          </button>
-          <button type="button" className="productCard__btn productCard_btn-red" onClick={removeProduct}>
-            <img src={trashIcon} alt="Trash icon"/>
-          </button>
-        </div>
+      {
+        isAdminMode &&
+          <>
+            {
+              removeProductLoading === props.id ? <Spinner/> :
+                <div className="productCard__admin-options">
+                  <button type="button" className="productCard__btn productCard_btn-blue" onClick={editProduct}>
+                    <img src={editIcon} alt="Edit icon"/>
+                  </button>
+                  <button type="button" className="productCard__btn productCard_btn-red" onClick={removeProduct}>
+                    <img src={trashIcon} alt="Trash icon"/>
+                  </button>
+                </div>
+            }
+          </>
       }
     </div>
   );

@@ -139,5 +139,4 @@ export type ProductsActions =
   GetAllProducers | SortProducts | FilterProducts |
   RefreshProductsArray | FilterProducers | RefreshProducers |
   FetchOneProduct | FetchOneProductSuccess | FetchOneProductFailure |
-  FilterProductsByType | SetFilterTypeName | SetFilterOnOff
-  ;
+  FilterProductsByType | SetFilterTypeName | SetFilterOnOff;

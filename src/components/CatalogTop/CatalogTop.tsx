@@ -14,7 +14,7 @@ const CatalogTop: React.FC = () => {
   };
 
   const onFilterByType = (type: string) => {
-   filterProductsByType(type);
+    filterProductsByType(type);
   };
 
   const refreshCatalog = () => {

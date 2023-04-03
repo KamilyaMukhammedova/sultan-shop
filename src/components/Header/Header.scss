@@ -120,14 +120,13 @@
     }
 
     @include large {
-      margin-left: 30px;
+      margin-left: 0;
       padding-left: 30px;
+      border-left: none;
     }
 
     @include medium {
       display: block;
-      border-left: none;
-      margin-left: 0;
       padding-left: 0;
       margin-bottom: 15px;
     }
@@ -418,5 +417,10 @@
     @include medium {
       display: none;
     }
+  }
+
+  &__nav-user {
+    color: #f6bc42;
+    font-weight: 600;
   }
 }
