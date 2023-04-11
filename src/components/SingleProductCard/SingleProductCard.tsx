@@ -81,7 +81,7 @@ const SingleProductCard: React.FC<Product> = (props) => {
           <div className="singleProductCard__price">{props.price} ₸</div>
           <div className="amount singleProductCard__amount">
             <button type="button" className="amount__btn" onClick={decreaseAmount}>-</button>
-            <span className="amount__number">{amount}</span>
+            <span className="amount__number" role={'amountInfo'}>{amount}</span>
             <button type="button" className="amount__btn" onClick={increaseAmount}>+</button>
           </div>
           <button type="button" className="singleProductCard__basket-btn" onClick={addProductToBasket}>
@@ -104,14 +104,14 @@ const SingleProductCard: React.FC<Product> = (props) => {
         <div className="singleProductCard__brief-info">
           {productInfo}
         </div>
-        <div className="singleProductCard__subtitle" onClick={onToggleDescription}>
+        <div className="singleProductCard__subtitle" onClick={onToggleDescription} role={'toggle-btn'}>
           <span>Описание</span>
           <img
             src={descriptionIsHidden ? arrowDownIcon : arrowUpIcon}
             alt="Arrow icon"
           />
         </div>
-        <p className={`singleProductCard__description ${descriptionIsHidden ? 'hide' : 'show'}`}>
+        <p className={`singleProductCard__description ${descriptionIsHidden ? 'hide' : 'show'}`} role={'description'}>
           {props.description}
         </p>
         <div className="singleProductCard__subtitle" onClick={onToggleFullInfo}>

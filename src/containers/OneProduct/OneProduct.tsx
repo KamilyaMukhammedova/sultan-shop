@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import SingleProductCard from "../../components/SingleProductCard/SingleProductCard";
 import { useParams } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
+import SingleProductCard from "../../components/SingleProductCard/SingleProductCard";
 import Spinner from "../../components/ui/Spinner/Spinner";
 import ErrorMsg from "../../components/ui/ErrorMsg/ErrorMsg";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
@@ -21,8 +21,8 @@ const OneProduct: React.FC = () => {
     id && fetchOneProductFromApi(id);
   }, [id]);
 
-  let breadCrumbs = null;
-  let productInfo = null;
+  let breadCrumbs: React.ReactNode = null;
+  let productInfo: React.ReactNode = null;
 
   if (oneProductFetchLoading) {
     productInfo = <Spinner/>;

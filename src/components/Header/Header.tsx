@@ -145,7 +145,7 @@ const Header: React.FC = () => {
                 </button>
               </div>
               <div className="header__bottom-box5">
-                <Link to={'/basket'} className="header__link">
+                <Link to={'/basket'} className="header__link" data-testid={'basket-link'}>
                   <MiniBasket/>
                 </Link>
               </div>

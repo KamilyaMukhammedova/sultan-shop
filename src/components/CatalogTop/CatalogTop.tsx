@@ -24,7 +24,9 @@ const CatalogTop: React.FC = () => {
   return (
     <section className="catalog-top">
       <div className="catalog-top__box1">
-        <h1 className="catalog-top__title" onClick={refreshCatalog}>Косметика и гигиена</h1>
+        <h1 className="catalog-top__title" onClick={refreshCatalog} data-testid={'catalog-title'}>
+          Косметика и гигиена
+        </h1>
         <div className="catalog-top__sorting">
           <label htmlFor="sorting" className="catalog-top__label">Сортировка:</label>
           <select
@@ -48,8 +50,7 @@ const CatalogTop: React.FC = () => {
             key={index}
             className={`catalog-top__filter-item 
             ${index < 4 ? 'catalog-top_filter1' : 'catalog-top_filter2'}
-            ${filterTypeName === type && 'active-type'}
-            `}
+            ${filterTypeName === type && 'active-type'}`}
             onClick={() => onFilterByType(type)}
           >
             {type}

@@ -14,16 +14,9 @@ const Basket: React.FC = () => {
 
   return (
     <>
-      <Modal isOpen={isOpen} toggle={toggle}>
-        <div className="modal__icon-div">
-          <img src={orderSuccessIcon} alt="Order Success Icon"/>
-        </div>
-        <p className="modal__text-bold">Спасибо за заказ</p>
-        <p className="modal__text">Наш менеджер свяжется с вами в ближайшее время</p>
-      </Modal>
       <div className="basket">
         <Breadcrumbs infoArr={breadCrumbs}/>
-        <h1 className="basket__title">Корзина</h1>
+        <h1 className="basket__title" data-testid={'basket-title'}>Корзина</h1>
         <div className="basket__inner">
           {
             basket.length === 0 ? <p className="info-msg">Нет товаров</p> :
@@ -57,6 +50,13 @@ const Basket: React.FC = () => {
           }
         </div>
       </div>
+      <Modal isOpen={isOpen} toggle={toggle}>
+        <div className="modal__icon-div">
+          <img src={orderSuccessIcon} alt="Order Success Icon"/>
+        </div>
+        <p className="modal__text-bold">Спасибо за заказ</p>
+        <p className="modal__text">Наш менеджер свяжется с вами в ближайшее время</p>
+      </Modal>
     </>
   );
 };

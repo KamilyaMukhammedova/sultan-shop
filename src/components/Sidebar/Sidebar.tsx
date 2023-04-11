@@ -131,6 +131,7 @@ const Sidebar: React.FC = () => {
               name="producerSearch"
               value={producerSearch}
               placeholder="Поиск..."
+              data-testid={'producerSearch'}
               className="sidebar__producer-search-input"
               onChange={onProducerSearchInput}
             />

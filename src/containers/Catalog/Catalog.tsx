@@ -30,7 +30,7 @@ const Catalog: React.FC = () => {
 
   const breadCrumbs = [{path: '', name: 'Каталог'}];
 
-  let productsCards = null;
+  let productsCards: React.ReactNode = null;
 
   if (fetchLoading) {
     productsCards = <Spinner/>;
@@ -56,7 +56,9 @@ const Catalog: React.FC = () => {
         />
       )
     );
-  } else {
+  }
+
+  if(!fetchError && !fetchLoading && products.length === 0) {
     productsCards = <p className="info-msg">Нет товаров</p>;
   }
 

@@ -14,7 +14,7 @@ interface IProps {
 const Breadcrumbs: React.FC<IProps> = (props) => {
   return (
     <div className="breadcrumbs">
-      <Link to={'/'} className="breadcrumbs__link">Главная</Link>
+      <Link to={'/'} className="breadcrumbs__link" data-testid={'main-link'}>Главная</Link>
       {props.infoArr.map((item, index) => (
         <Link
           key={index}

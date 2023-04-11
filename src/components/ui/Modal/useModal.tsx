@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 
 export default function useModal() {
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const {resetBasket} = useActions();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
     if(isOpen) {

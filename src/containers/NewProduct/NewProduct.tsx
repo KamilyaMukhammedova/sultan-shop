@@ -23,8 +23,7 @@ const NewProduct: React.FC = () => {
       editProductError,
       oneProductFetchLoading
     } =
-      useTypedSelector((state) => state.products)
-  ;
+      useTypedSelector((state) => state.products);
 
   const {isAdminMode} = useTypedSelector((state) => state.mode);
 
@@ -56,8 +55,7 @@ const NewProduct: React.FC = () => {
     event.preventDefault();
 
     const checkedTypes =
-      types.filter(type => Object.values(type)[0]).map(item => Object.keys(item)[0])
-    ;
+      types.filter(type => Object.values(type)[0]).map(item => Object.keys(item)[0]);
 
     const productData: Product = {
       image: form.image,

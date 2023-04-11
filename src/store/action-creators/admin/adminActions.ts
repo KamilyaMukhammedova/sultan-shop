@@ -3,13 +3,16 @@ import axiosApi from "../../../axiosApi";
 import { ModeActions, ModeActionsTypes } from "../../../types/mode";
 import { ApiProducts, Product } from "../../../types/products";
 import { AdminActions, AdminActionsTypes } from "../../../types/admin";
+import { BasketActions, BasketActionsTypes } from "../../../types/basket";
 
 export const manageMode = (isAdmin: boolean) => {
-  return (dispatch: Dispatch<ModeActions>) => {
+  return (dispatch: Dispatch<ModeActions | BasketActions>) => {
     dispatch({
       type: ModeActionsTypes.SET_MODE,
       payload: isAdmin
     });
+
+    dispatch({type: BasketActionsTypes.RESET_BASKET});
   }
 };
 
